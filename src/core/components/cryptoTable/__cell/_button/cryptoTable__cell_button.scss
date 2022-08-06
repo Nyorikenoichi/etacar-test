@@ -1,0 +1,10 @@
+.cryptoTable__cell_button {
+  background: $secondary-color;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 300ms;
+
+  &:hover {
+    background: $secondary-color-light;
+  }
+}

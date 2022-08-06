@@ -1,0 +1,8 @@
+.cryptoTable__cell_button-delete {
+  color: $text-light;
+  background: $cancel-color;
+
+  &:hover {
+    background: $cancel-color-light;
+  }
+}

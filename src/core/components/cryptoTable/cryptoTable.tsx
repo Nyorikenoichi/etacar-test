@@ -1,9 +1,11 @@
 import React, { useMemo, useState } from 'react';
 import { Pagination } from '../pagination/pagination';
-import data from '../../mock-data.json';
+import mockupData from '../../mock-data.json';
 import { formatFloat } from '../../helpers/formatFloat';
+import { CurrencyInfo } from '../../interfaces/CurrencyInfo';
 
 const PageSize = 14;
+const data: CurrencyInfo[] = mockupData;
 
 export const CryptoTable = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -63,7 +65,9 @@ export const CryptoTable = () => {
                     ? `${formatFloat(item.changePercent24Hr)}%`
                     : ''}
                 </td>
-                <td className="crypto-table__cell">+</td>
+                <td className="crypto-table__cell">
+                  <div className="cryptoTable__cell_button">+</div>
+                </td>
               </tr>
             );
           })}

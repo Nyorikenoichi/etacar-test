@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import data from '../../mock-data.json';
 import { formatFloat } from '../../helpers/formatFloat';
+import ModalBriefcase from '../modalBriefcase/modalBriefcase';
+import { CurrencyInfo } from '../../interfaces/CurrencyInfo';
 
 export const Header = (): JSX.Element => {
-  const currencies = data.slice(0, 3);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const currencies: CurrencyInfo[] = data.slice(0, 3);
   const currentBriefcaseValue = 5823.19;
   const initialBriefcaseValue = 5000;
 
@@ -19,7 +22,13 @@ export const Header = (): JSX.Element => {
           </p>
         ))}
       </div>
-      <div className="stack header__briefcase">
+      <div
+        className="stack header__briefcase"
+        onClick={(e) => {
+          e.stopPropagation();
+          setIsModalOpen(true);
+        }}
+      >
         <p>Briefcase: </p>
         <div className="stack stack_vertical header__briefcase-summary">
           <div>
@@ -32,6 +41,7 @@ export const Header = (): JSX.Element => {
           </div>
         </div>
       </div>
+      {isModalOpen && <ModalBriefcase setIsOpen={setIsModalOpen} />}
     </header>
   );
 };
