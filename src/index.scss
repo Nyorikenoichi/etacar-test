@@ -5,7 +5,7 @@
 @import './src/core/components/footer/footer.scss';
 @import './src/core/components/content/content.scss';
 @import './src/core/components/cryptoTable/cryptoTable.scss';
-@import './src/core/components/cryptoTablePagination/cryptoTablePagination.scss';
+@import 'core/components/pagination/pagination';
 
 body {
   width: 100vw;

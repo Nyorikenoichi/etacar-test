@@ -9,7 +9,7 @@ interface CryptoTablePaginationProps {
   pageSize: number;
 }
 
-export const CryptoTablePagination = ({
+export const Pagination = ({
   onPageChange,
   totalCount,
   siblingCount,
@@ -37,7 +37,7 @@ export const CryptoTablePagination = ({
 
   const lastPage = paginationRange[paginationRange.length - 1];
   return (
-    <ul className="pagination__container">
+    <ul className="pagination">
       <li
         className={`pagination__item${
           currentPage === 1 ? ' pagination__item_disabled' : ''

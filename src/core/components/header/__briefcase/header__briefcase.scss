@@ -1,0 +1,14 @@
+.header__briefcase {
+  justify-content: center;
+  width: 15%;
+  height: 80%;
+  margin: 0 150px;
+  padding: 0 15px;
+  border: 2px solid $secondary-color;
+  border-radius: 10px;
+  transition: 300ms;
+
+  &:hover {
+    background: $secondary-color;
+  }
+}

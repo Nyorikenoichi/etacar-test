@@ -1,8 +1,9 @@
 import React, { useMemo, useState } from 'react';
-import { CryptoTablePagination } from '../cryptoTablePagination/cryptoTablePagination';
-import data from './mock-data.json';
+import { Pagination } from '../pagination/pagination';
+import data from '../../mock-data.json';
+import { formatFloat } from '../../helpers/formatFloat';
 
-const PageSize = 10;
+const PageSize = 14;
 
 export const CryptoTable = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -15,41 +16,60 @@ export const CryptoTable = () => {
 
   return (
     <div className="stack stack_vertical crypto-table__container">
-      <table style={{ width: '100%' }}>
+      <table className="crypto-table">
         <thead>
-          <tr>
-            <th>Rank</th>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Market Cap</th>
-            <th>VWAP(24Hr)</th>
-            <th>Supply</th>
-            <th>Volume(24Hr)</th>
-            <th>Change(24Hr)</th>
+          <tr className="crypto-table__row crypto-table__row_header">
+            <th className="crypto-table__cell">Rank</th>
+            <th className="crypto-table__cell crypto-table__cell_align-left crypto-table__cell_wide">
+              Name
+            </th>
+            <th className="crypto-table__cell">Price</th>
+            <th className="crypto-table__cell">Market Cap</th>
+            <th className="crypto-table__cell">VWAP(24Hr)</th>
+            <th className="crypto-table__cell">Supply</th>
+            <th className="crypto-table__cell">Volume(24Hr)</th>
+            <th className="crypto-table__cell">Change(24Hr)</th>
+            <th />
           </tr>
         </thead>
         <tbody>
           {currentTableData.map((item) => {
             return (
-              <tr key={item.id}>
-                <td>{item.rank}</td>
-                <td>{item.name}</td>
-                <td>{parseFloat(item.priceUsd).toFixed(2)}</td>
-                <td>{parseFloat(item.marketCapUsd).toFixed(2)}</td>
-                <td>{parseFloat(item.vwap24Hr).toFixed(2)}</td>
-                <td>{parseFloat(item.supply).toFixed(2)}</td>
-                <td>{parseFloat(item.volumeUsd24Hr).toFixed(2)}</td>
-                <td>
+              <tr
+                className="crypto-table__row crypto-table__row_body"
+                key={item.id}
+              >
+                <td className="crypto-table__cell">{item.rank}</td>
+                <td className="crypto-table__cell crypto-table__cell_align-left">
+                  {item.name}
+                </td>
+                <td className="crypto-table__cell">
+                  ${formatFloat(item.priceUsd)}
+                </td>
+                <td className="crypto-table__cell">
+                  ${formatFloat(item.marketCapUsd)}
+                </td>
+                <td className="crypto-table__cell">
+                  ${formatFloat(item.vwap24Hr)}
+                </td>
+                <td className="crypto-table__cell">
+                  {formatFloat(item.supply)}
+                </td>
+                <td className="crypto-table__cell">
+                  ${formatFloat(item.volumeUsd24Hr)}
+                </td>
+                <td className="crypto-table__cell">
                   {typeof item.changePercent24Hr === 'string'
-                    ? parseFloat(item.changePercent24Hr).toFixed(2)
+                    ? `${formatFloat(item.changePercent24Hr)}%`
                     : ''}
                 </td>
+                <td className="crypto-table__cell">+</td>
               </tr>
             );
           })}
         </tbody>
       </table>
-      <CryptoTablePagination
+      <Pagination
         currentPage={currentPage}
         totalCount={data.length}
         pageSize={PageSize}

@@ -1,7 +1,12 @@
 .header {
   display: flex;
-  justify-content: center;
   width: 100%;
+  font-weight: 300;
+  font-size: 22px;
   height: $header-height;
   background-color: $background-light;
 }
+
+@import "./__currencies/header__currencies.scss";
+@import "./__briefcase/header__briefcase.scss";
+@import "./__briefcase-summary/header__briefcase-summary.scss";

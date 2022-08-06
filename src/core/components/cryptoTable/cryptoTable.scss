@@ -1,5 +1,12 @@
-.crypto-table__container {
-  width: 80%;
-  background-color: $background-light;
-  border-radius: 10px;
+.crypto-table {
+  min-width: 400px;
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 10px 10px 0 0;
+  font-size: 0.9em;
+  overflow: hidden;
 }
+
+@import "./__container/cryptoTable__container.scss";
+@import "./__cell/cryptoTable__cell.scss";
+@import "./__row/cryptoTable__row.scss";

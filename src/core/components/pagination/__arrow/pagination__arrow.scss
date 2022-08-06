@@ -1,0 +1,14 @@
+.pagination__arrow {
+  &::before {
+    position: relative;
+    content: '';
+    display: inline-block;
+    width: 0.4em;
+    height: 0.4em;
+    border-right: 0.12em solid rgba(0, 0, 0, 0.87);
+    border-top: 0.12em solid rgba(0, 0, 0, 0.87);
+  }
+}
+
+@import '_left/pagination__arrow_left.scss';
+@import '_right/pagination__arrow_right.scss';
