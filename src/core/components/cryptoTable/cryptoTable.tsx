@@ -3,12 +3,25 @@ import { Pagination } from '../pagination/pagination';
 import mockupData from '../../mock-data.json';
 import { formatFloat } from '../../helpers/formatFloat';
 import { CurrencyInfo } from '../../interfaces/CurrencyInfo';
+import ModalAddCurrency from '../modalAddCurrency/modalAddCurrency';
 
 const PageSize = 14;
 const data: CurrencyInfo[] = mockupData;
 
 export const CryptoTable = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentCurrency, setCurrentCurrency] = useState<CurrencyInfo | null>(
+    null
+  );
   const [currentPage, setCurrentPage] = useState(1);
+
+  const onAddCurrency =
+    (currency: CurrencyInfo) =>
+    (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+      e.stopPropagation();
+      setCurrentCurrency(currency);
+      setIsModalOpen(true);
+    };
 
   const currentTableData = useMemo(() => {
     const firstPageIndex = (currentPage - 1) * PageSize;
@@ -66,7 +79,12 @@ export const CryptoTable = () => {
                     : ''}
                 </td>
                 <td className="crypto-table__cell">
-                  <div className="cryptoTable__cell_button">+</div>
+                  <div
+                    className="cryptoTable__cell_button"
+                    onClick={onAddCurrency(item)}
+                  >
+                    +
+                  </div>
                 </td>
               </tr>
             );
@@ -80,6 +98,12 @@ export const CryptoTable = () => {
         onPageChange={(page) => setCurrentPage(page)}
         siblingCount={1}
       />
+      {isModalOpen && (
+        <ModalAddCurrency
+          setIsOpen={setIsModalOpen}
+          currency={currentCurrency}
+        />
+      )}
     </div>
   );
 };

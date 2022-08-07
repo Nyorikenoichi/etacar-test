@@ -49,7 +49,12 @@ export const Pagination = ({
       {paginationRange.map((pageNumber) => {
         if (pageNumber === dots) {
           return (
-            <li className="pagination__item pagination__item_dots">&#8230;</li>
+            <li
+              key={pageNumber}
+              className="pagination__item pagination__item_dots"
+            >
+              &#8230;
+            </li>
           );
         }
 
