@@ -16,12 +16,16 @@ const ModalBriefcase = ({ setIsOpen }: ModalBriefcaseProps) => {
     initialPrice: 1683.14,
   };
 
+  const onCloseModal = () => {
+    setIsOpen(false);
+  };
+
   return (
     <>
-      <div className="modal__background" onClick={() => setIsOpen(false)} />
+      <div className="modal__background" onClick={onCloseModal} />
       <div className="modal">
         <div className="stack stack_vertical modal__container">
-          <button className="close-button" onClick={() => setIsOpen(false)}>
+          <button className="close-button" onClick={onCloseModal}>
             X
           </button>
           <div className="modal__heading">Briefcase</div>
@@ -48,7 +52,10 @@ const ModalBriefcase = ({ setIsOpen }: ModalBriefcaseProps) => {
                     </td>
                     <td className="crypto-table__cell">{item.count}</td>
                     <td className="crypto-table__cell">
-                      <div className="cryptoTable__cell_button cryptoTable__cell_button-delete">
+                      <div
+                        className="cryptoTable__cell_button cryptoTable__cell_button-delete"
+                        onClick={onCloseModal}
+                      >
                         X
                       </div>
                     </td>

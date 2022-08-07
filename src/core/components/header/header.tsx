@@ -13,6 +13,13 @@ export const Header = (): JSX.Element => {
   const diff = currentBriefcaseValue - initialBriefcaseValue;
   const percentDiff = (diff / initialBriefcaseValue) * 100;
 
+  const onOpenBriefcase = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    e.stopPropagation();
+    setIsModalOpen(true);
+  };
+
+  const showPlus = diff > 0 ? '+' : '';
+
   return (
     <header className="stack header">
       <div className="stack header__currencies">
@@ -22,21 +29,14 @@ export const Header = (): JSX.Element => {
           </p>
         ))}
       </div>
-      <div
-        className="stack header__briefcase"
-        onClick={(e) => {
-          e.stopPropagation();
-          setIsModalOpen(true);
-        }}
-      >
+      <div className="stack header__briefcase" onClick={onOpenBriefcase}>
         <p>Briefcase: </p>
         <div className="stack stack_vertical header__briefcase-summary">
           <div>
-            ${initialBriefcaseValue} {diff > 0 ? '+' : '-'}{' '}
-            {formatFloat(diff.toString())}
+            ${initialBriefcaseValue} {showPlus} {formatFloat(diff.toString())}
           </div>
           <div>
-            ({+diff > 0 ? '+' : ''}
+            ({showPlus}
             {formatFloat(percentDiff.toFixed(2))}%)
           </div>
         </div>

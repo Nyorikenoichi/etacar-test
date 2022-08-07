@@ -9,29 +9,29 @@ interface ModalAddCurrencyProps {
 const ModalAddCurrency = ({ setIsOpen, currency }: ModalAddCurrencyProps) => {
   const [number, setNumber] = useState<number | string>('');
 
-  const handleNumber = (e: ChangeEvent<HTMLInputElement>) => {
+  const onInputAmount = (e: ChangeEvent<HTMLInputElement>) => {
     const input = e.target.value;
     if (input.match(/^([0-9]+)?(\.)?([0-9]+)?$/)) {
       setNumber(input);
     }
   };
 
-  const handleFloat = () => {
+  const onInputBlur = () => {
     if (typeof number === 'string') {
       setNumber(parseFloat(number) || '');
     }
   };
 
-  const onAddCurrency = () => {
+  const onCloseModal = () => {
     setIsOpen(false);
   };
 
   return (
     <>
-      <div className="modal__background" onClick={() => setIsOpen(false)} />
+      <div className="modal__background" onClick={onCloseModal} />
       <div className="modal modal_add-currency">
         <div className="stack stack_vertical modal__container">
-          <button className="close-button" onClick={() => setIsOpen(false)}>
+          <button className="close-button" onClick={onCloseModal}>
             X
           </button>
           <div className="modal__heading">Adding {currency?.name}</div>
@@ -41,10 +41,10 @@ const ModalAddCurrency = ({ setIsOpen, currency }: ModalAddCurrencyProps) => {
               className="modal__input"
               placeholder="Type amount..."
               value={number}
-              onChange={handleNumber}
-              onBlur={handleFloat}
+              onChange={onInputAmount}
+              onBlur={onInputBlur}
             />
-            <button className="modal__accept-button" onClick={onAddCurrency}>
+            <button className="modal__accept-button" onClick={onCloseModal}>
               Add
             </button>
           </div>

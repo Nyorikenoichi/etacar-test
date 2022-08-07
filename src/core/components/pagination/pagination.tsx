@@ -23,6 +23,7 @@ export const Pagination = ({
     siblingCount,
     pageSize,
   });
+  const lastPage = paginationRange[paginationRange.length - 1];
 
   if (currentPage === 0 || paginationRange.length < 2) {
     return null;
@@ -36,15 +37,22 @@ export const Pagination = ({
     onPageChange(currentPage - 1);
   };
 
-  const lastPage = paginationRange[paginationRange.length - 1];
+  const onChangePage = (pageNumber: number) => () => {
+    onPageChange(pageNumber);
+  };
+
+  const isFirstPage = () =>
+    currentPage === 1 ? ' pagination__item_disabled' : '';
+
+  const isLastPage = () =>
+    currentPage === lastPage ? ' pagination__item_disabled' : '';
+
+  const isCurrentPage = (pageNumber: string | number) =>
+    currentPage === pageNumber ? ' pagination__item_selected' : '';
+
   return (
     <ul className="pagination">
-      <li
-        className={`pagination__item${
-          currentPage === 1 ? ' pagination__item_disabled' : ''
-        }`}
-        onClick={onPrevious}
-      >
+      <li className={`pagination__item${isFirstPage()}`} onClick={onPrevious}>
         <div className="pagination__arrow pagination__arrow_left" />
       </li>
       {paginationRange.map((pageNumber) => {
@@ -61,22 +69,15 @@ export const Pagination = ({
 
         return (
           <li
-            key={pageNumber}
-            className={`pagination__item${
-              currentPage === pageNumber ? ' pagination__item_selected' : ''
-            }`}
-            onClick={() => onPageChange(+pageNumber)}
+            key={uuidv4()}
+            className={`pagination__item${isCurrentPage(pageNumber)}`}
+            onClick={onChangePage(+pageNumber)}
           >
             {pageNumber}
           </li>
         );
       })}
-      <li
-        className={`pagination__item${
-          currentPage === lastPage ? ' pagination__item_disabled' : ''
-        }`}
-        onClick={onNext}
-      >
+      <li className={`pagination__item${isLastPage()}`} onClick={onNext}>
         <div className="pagination__arrow pagination__arrow_right" />
       </li>
     </ul>
