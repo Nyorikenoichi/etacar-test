@@ -1,0 +1,10 @@
+.crypto-table__row {
+  border-bottom: 1px solid $table-border-color;
+  text-align: center;
+  transition: 300ms;
+
+}
+
+@import "./_body/cryptoTable__row_body.scss";
+@import "./_header/cryptoTable__row_header.scss";
+@import "./_clickable/cryptoTable__row_clickable.scss";

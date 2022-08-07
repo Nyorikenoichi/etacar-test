@@ -1,0 +1,9 @@
+.pagination {
+  display: flex;
+  list-style-type: none;
+  padding-inline: 0;
+}
+
+@import './__item/pagination__item.scss';
+@import './__arrow/pagination__arrow.scss';
+
