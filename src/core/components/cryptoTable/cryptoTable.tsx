@@ -1,18 +1,26 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Pagination } from '../pagination/pagination';
-import mockupData from '../../mock-data.json';
 import { formatFloat } from '../../helpers/formatFloat';
 import { CurrencyInfo } from '../../interfaces/currencyInfo';
 import ModalAddCurrency from '../modalAddCurrency/modalAddCurrency';
 import { useNavigate } from 'react-router-dom';
 import { MainRoutes } from '../../constants/mainRoutes';
+import { useAppSelector } from '../../hooks/useAppSelector';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { fetchCurrencies } from '../../redux/slices/currenciesSlice';
 
 const PageSize = 14;
-const data: CurrencyInfo[] = mockupData;
 
 export const CryptoTable = () => {
+  const currencies = useAppSelector((state) => state.currency.currencies);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fetchCurrencies());
+  }, [dispatch]);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [currentCurrency, setCurrentCurrency] = useState<CurrencyInfo | null>(
+  const [selectedCurrency, setSelectedCurrency] = useState<CurrencyInfo | null>(
     null
   );
   const [currentPage, setCurrentPage] = useState(1);
@@ -22,7 +30,7 @@ export const CryptoTable = () => {
     (currency: CurrencyInfo) =>
     (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
       e.stopPropagation();
-      setCurrentCurrency(currency);
+      setSelectedCurrency(currency);
       setIsModalOpen(true);
     };
 
@@ -35,8 +43,8 @@ export const CryptoTable = () => {
   const currentTableData = useMemo(() => {
     const firstPageIndex = (currentPage - 1) * PageSize;
     const lastPageIndex = firstPageIndex + PageSize;
-    return data.slice(firstPageIndex, lastPageIndex);
-  }, [currentPage]);
+    return currencies.slice(firstPageIndex, lastPageIndex);
+  }, [currentPage, currencies]);
 
   return (
     <div className="stack stack_vertical crypto-table__container">
@@ -103,7 +111,7 @@ export const CryptoTable = () => {
       </table>
       <Pagination
         currentPage={currentPage}
-        totalCount={data.length}
+        totalCount={currencies.length}
         pageSize={PageSize}
         onPageChange={(page) => setCurrentPage(page)}
         siblingCount={1}
@@ -111,7 +119,7 @@ export const CryptoTable = () => {
       {isModalOpen && (
         <ModalAddCurrency
           setIsOpen={setIsModalOpen}
-          currency={currentCurrency}
+          currency={selectedCurrency}
         />
       )}
     </div>
