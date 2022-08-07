@@ -7,8 +7,8 @@ import { CurrencyInfo } from '../../interfaces/CurrencyInfo';
 export const Header = (): JSX.Element => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const currencies: CurrencyInfo[] = data.slice(0, 3);
-  const currentBriefcaseValue = 5823.19;
-  const initialBriefcaseValue = 5000;
+  const currentBriefcaseValue = 1683.14;
+  const initialBriefcaseValue = 1500;
 
   const diff = currentBriefcaseValue - initialBriefcaseValue;
   const percentDiff = (diff / initialBriefcaseValue) * 100;

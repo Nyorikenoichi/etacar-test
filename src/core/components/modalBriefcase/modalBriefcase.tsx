@@ -13,22 +13,23 @@ const ModalBriefcase = ({ setIsOpen }: ModalBriefcaseProps) => {
       { currency: data[0], count: 0.126 },
       { currency: data[1], count: 2 },
     ],
-    initialPrice: 10000,
+    initialPrice: 1683.14,
   };
 
   return (
     <>
-      <div className="darkBG" onClick={() => setIsOpen(false)} />
-      <div className="centered">
-        <div className="stack stack_vertical modal">
-          <button className="closeBtn" onClick={() => setIsOpen(false)}>
+      <div className="modal__background" onClick={() => setIsOpen(false)} />
+      <div className="modal">
+        <div className="stack stack_vertical modal__container">
+          <button
+            className="modal__close-button"
+            onClick={() => setIsOpen(false)}
+          >
             X
           </button>
-          <div className="heading">Briefcase</div>
-          <div className="modalContent">
-            <p>Here you can manage your currencies</p>
-          </div>
-          <div className="currencies">
+          <div className="modal__heading">Briefcase</div>
+          <p>Total price is ${briefcase.initialPrice}</p>
+          <div className="crypto-table__container modal__currencies">
             <table className="crypto-table">
               <thead>
                 <tr className="crypto-table__row crypto-table__row_header">
