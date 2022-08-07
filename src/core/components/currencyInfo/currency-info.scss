@@ -1,0 +1,12 @@
+.currency-info {
+  position: fixed;
+  justify-content: flex-start;
+  width: 60%;
+  height: 700px;
+  padding: 40px;
+  background-color: $background-light;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.2);
+  font-weight: 300;
+  font-size: 22px;
+}

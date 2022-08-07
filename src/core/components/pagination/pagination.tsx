@@ -1,5 +1,6 @@
 import React from 'react';
 import { dots, usePagination } from '../../hooks/usePagination';
+import { v4 as uuidv4 } from 'uuid';
 
 interface CryptoTablePaginationProps {
   onPageChange: (x: number) => void;
@@ -50,7 +51,7 @@ export const Pagination = ({
         if (pageNumber === dots) {
           return (
             <li
-              key={pageNumber}
+              key={uuidv4()}
               className="pagination__item pagination__item_dots"
             >
               &#8230;

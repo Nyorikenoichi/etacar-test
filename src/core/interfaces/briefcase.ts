@@ -1,4 +1,4 @@
-import { CurrencyInfo } from './CurrencyInfo';
+import { CurrencyInfo } from './currencyInfo';
 
 export interface Briefcase {
   currencies: {

@@ -3,10 +3,10 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  z-index: 2;
 }
 
 @import "./__background/modalBriefcase__background.scss";
-@import "./__close-button/modalBriefcase__close-button.scss";
 @import "./__container/modalBriefcase__container.scss";
 @import "./__currencies/modalBriefcase__currencies.scss";
 @import "./__heading/modalBriefcase__heading.scss";

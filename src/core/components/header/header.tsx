@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import data from '../../mock-data.json';
 import { formatFloat } from '../../helpers/formatFloat';
 import ModalBriefcase from '../modalBriefcase/modalBriefcase';
-import { CurrencyInfo } from '../../interfaces/CurrencyInfo';
+import { CurrencyInfo } from '../../interfaces/currencyInfo';
 
 export const Header = (): JSX.Element => {
   const [isModalOpen, setIsModalOpen] = useState(false);

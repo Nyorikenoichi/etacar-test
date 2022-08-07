@@ -2,8 +2,10 @@ import React, { useMemo, useState } from 'react';
 import { Pagination } from '../pagination/pagination';
 import mockupData from '../../mock-data.json';
 import { formatFloat } from '../../helpers/formatFloat';
-import { CurrencyInfo } from '../../interfaces/CurrencyInfo';
+import { CurrencyInfo } from '../../interfaces/currencyInfo';
 import ModalAddCurrency from '../modalAddCurrency/modalAddCurrency';
+import { useNavigate } from 'react-router-dom';
+import { MainRoutes } from '../../constants/mainRoutes';
 
 const PageSize = 14;
 const data: CurrencyInfo[] = mockupData;
@@ -14,6 +16,7 @@ export const CryptoTable = () => {
     null
   );
   const [currentPage, setCurrentPage] = useState(1);
+  const navigate = useNavigate();
 
   const onAddCurrency =
     (currency: CurrencyInfo) =>
@@ -21,6 +24,12 @@ export const CryptoTable = () => {
       e.stopPropagation();
       setCurrentCurrency(currency);
       setIsModalOpen(true);
+    };
+
+  const onGoToInfo =
+    (id: string) => (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+      e.stopPropagation();
+      navigate(`${MainRoutes.about}?id=${id}`);
     };
 
   const currentTableData = useMemo(() => {
@@ -51,8 +60,9 @@ export const CryptoTable = () => {
           {currentTableData.map((item) => {
             return (
               <tr
-                className="crypto-table__row crypto-table__row_body"
+                className="crypto-table__row crypto-table__row_body crypto-table__row_clickable"
                 key={item.id}
+                onClick={onGoToInfo(item.id)}
               >
                 <td className="crypto-table__cell">{item.rank}</td>
                 <td className="crypto-table__cell crypto-table__cell_align-left">

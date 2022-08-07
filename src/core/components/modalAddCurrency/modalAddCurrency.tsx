@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useState } from 'react';
-import { CurrencyInfo } from '../../interfaces/CurrencyInfo';
+import { CurrencyInfo } from '../../interfaces/currencyInfo';
 
 interface ModalAddCurrencyProps {
   setIsOpen: (option: boolean) => void;
@@ -29,12 +29,9 @@ const ModalAddCurrency = ({ setIsOpen, currency }: ModalAddCurrencyProps) => {
   return (
     <>
       <div className="modal__background" onClick={() => setIsOpen(false)} />
-      <div className="modal">
+      <div className="modal modal_add-currency">
         <div className="stack stack_vertical modal__container">
-          <button
-            className="modal__close-button"
-            onClick={() => setIsOpen(false)}
-          >
+          <button className="close-button" onClick={() => setIsOpen(false)}>
             X
           </button>
           <div className="modal__heading">Adding {currency?.name}</div>

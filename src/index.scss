@@ -24,7 +24,9 @@ body {
 @import './src/core/components/header/header.scss';
 @import './src/core/components/footer/footer.scss';
 @import './src/core/components/content/content.scss';
+@import './src/core/components/currencyInfo/currency-info.scss';
 @import './src/core/components/cryptoTable/cryptoTable.scss';
 @import './src/core/components/pagination/pagination.scss';
-@import 'core/components/modalBriefcase/modalBriefcase.scss';
-@import 'core/components/modalAddCurrency/modalAddCurrency.scss';
+@import './src/core/components/closeButton/closeButton.scss';
+@import './src/core/components/modalBriefcase/modalBriefcase.scss';
+@import './src/core/components/modalAddCurrency/modalAddCurrency.scss';

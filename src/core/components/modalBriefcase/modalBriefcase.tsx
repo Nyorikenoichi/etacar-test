@@ -1,5 +1,5 @@
 import React from 'react';
-import { Briefcase } from '../../interfaces/Briefcase';
+import { Briefcase } from '../../interfaces/briefcase';
 import data from '../../mock-data.json';
 import { formatFloat } from '../../helpers/formatFloat';
 
@@ -21,10 +21,7 @@ const ModalBriefcase = ({ setIsOpen }: ModalBriefcaseProps) => {
       <div className="modal__background" onClick={() => setIsOpen(false)} />
       <div className="modal">
         <div className="stack stack_vertical modal__container">
-          <button
-            className="modal__close-button"
-            onClick={() => setIsOpen(false)}
-          >
+          <button className="close-button" onClick={() => setIsOpen(false)}>
             X
           </button>
           <div className="modal__heading">Briefcase</div>
