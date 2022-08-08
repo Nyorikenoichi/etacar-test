@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useQuery } from '../../hooks/useQuery';
 import { formatFloat } from '../../helpers/formatFloat';
 import { MainRoutes } from '../../constants/mainRoutes';
@@ -6,9 +6,12 @@ import { useNavigate } from 'react-router-dom';
 import { AreaChart } from '../areaChart/areaChart';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
-import { fetchHistory } from '../../redux/slices/currenciesSlice';
+import { fetchHistory } from '../../redux/slices/currencySlice';
+import ModalAddCurrency from '../modalAddCurrency/modalAddCurrency';
 
 export const CurrencyInfo = (): JSX.Element => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const navigate = useNavigate();
   const query = useQuery();
   const currencyId = query.get('id');
@@ -56,6 +59,10 @@ export const CurrencyInfo = (): JSX.Element => {
     navigate(MainRoutes.main);
   };
 
+  const onAddCurrency = () => {
+    setIsModalOpen(true);
+  };
+
   return (
     <>
       {loading && <div className="preloader" />}
@@ -65,16 +72,24 @@ export const CurrencyInfo = (): JSX.Element => {
           <button className="close-button" onClick={onBackToMain}>
             {'<'}
           </button>
-          <div className="currency-info__heading">{currency?.name}</div>
+          <div className="stack">
+            <div className="currency-info__heading">{currency?.name}</div>
+            <button className="accept-button" onClick={onAddCurrency}>
+              Add to briefcase
+            </button>
+          </div>
           <div className="stack currency-info__prices">
-            <p>Current price: ${formatFloat(currentPrice)}</p>
-            <p>Maximal price: ${formatFloat(maxPrice)}</p>
-            <p>Minimal price: ${formatFloat(minPrice)}</p>
-            <p>Average price: ${formatFloat(averagePrice)}</p>
+            <p>Price: ${formatFloat(currentPrice)}</p>
+            <p>Maximal: ${formatFloat(maxPrice)}</p>
+            <p>Minimal: ${formatFloat(minPrice)}</p>
+            <p>Average: ${formatFloat(averagePrice)}</p>
           </div>
           <AreaChart history={history} />
         </div>
       ) : null}
+      {isModalOpen && (
+        <ModalAddCurrency setIsOpen={setIsModalOpen} currency={currency} />
+      )}
     </>
   );
 };

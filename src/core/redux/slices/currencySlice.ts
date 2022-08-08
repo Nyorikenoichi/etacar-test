@@ -20,7 +20,7 @@ const initialState: InitialState = {
 const apiUrl = 'https://api.coincap.io/v2/assets';
 
 export const fetchCurrencies = createAsyncThunk(
-  'currencies/fetchCurrencies',
+  'currency/fetchCurrencies',
   async () => {
     const response = await axios.get(apiUrl);
     const apiData = await response.data;
@@ -29,7 +29,7 @@ export const fetchCurrencies = createAsyncThunk(
 );
 
 export const fetchHistory = createAsyncThunk(
-  'currencies/fetchCurrencyHistory',
+  'currency/fetchCurrencyHistory',
   async (id: string) => {
     const response = await axios.get(`${apiUrl}/${id}/history?interval=d1`);
     const apiData = await response.data;
@@ -37,7 +37,7 @@ export const fetchHistory = createAsyncThunk(
   }
 );
 
-const userSlice = createSlice({
+const currencySlice = createSlice({
   name: 'currency',
   initialState,
   reducers: {},
@@ -77,4 +77,4 @@ const userSlice = createSlice({
   },
 });
 
-export default userSlice.reducer;
+export const currencyReducer = currencySlice.reducer;

@@ -65,5 +65,5 @@ export const AreaChart = ({ history }: AreaChartProps): JSX.Element => {
     ],
   };
 
-  return <Line options={options} data={data} />;
+  return <Line options={options} data={data} style={{ maxHeight: '450px' }} />;
 };

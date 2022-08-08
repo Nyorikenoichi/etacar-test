@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Pagination } from '../pagination/pagination';
 import { formatFloat } from '../../helpers/formatFloat';
 import { CurrencyInfo } from '../../interfaces/currencyInfo';
@@ -6,8 +6,6 @@ import ModalAddCurrency from '../modalAddCurrency/modalAddCurrency';
 import { useNavigate } from 'react-router-dom';
 import { MainRoutes } from '../../constants/mainRoutes';
 import { useAppSelector } from '../../hooks/useAppSelector';
-import { useAppDispatch } from '../../hooks/useAppDispatch';
-import { fetchCurrencies } from '../../redux/slices/currenciesSlice';
 
 const PageSize = 14;
 
@@ -15,11 +13,6 @@ export const CryptoTable = () => {
   const { currencies, error, loading } = useAppSelector(
     (state) => state.currency
   );
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(fetchCurrencies());
-  }, [dispatch]);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedCurrency, setSelectedCurrency] = useState<CurrencyInfo | null>(
