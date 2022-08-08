@@ -1,4 +1,4 @@
 export interface HistoryItem {
   time: number;
-  priceUsd: number;
-};
+  priceUsd: string;
+}
