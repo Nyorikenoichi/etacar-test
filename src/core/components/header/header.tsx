@@ -1,29 +1,43 @@
 import React, { useState } from 'react';
-import data from '../../mock-data.json';
 import { formatFloat } from '../../helpers/formatFloat';
 import ModalBriefcase from '../modalBriefcase/modalBriefcase';
-import { CurrencyInfo } from '../../interfaces/currencyInfo';
+import { useAppSelector } from '../../hooks/useAppSelector';
+import {
+  calculateCurrentBriefcasePrice,
+  calculateInitialBriefcasePrice,
+} from '../../helpers/briefcaseCalculators';
 
 export const Header = (): JSX.Element => {
+  const { currencies } = useAppSelector((state) => state.currency);
+  const briefcase = useAppSelector((state) => state.briefcase);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const currencies: CurrencyInfo[] = data.slice(0, 3);
-  const currentBriefcaseValue = 1683.14;
-  const initialBriefcaseValue = 1500;
+
+  const topCurrencies = currencies.slice(0, 3);
+  const currentBriefcaseValue = calculateCurrentBriefcasePrice(
+    briefcase.currencies,
+    currencies
+  );
+  const initialBriefcaseValue = calculateInitialBriefcasePrice(
+    briefcase.currencies
+  );
 
   const diff = currentBriefcaseValue - initialBriefcaseValue;
-  const percentDiff = (diff / initialBriefcaseValue) * 100;
+  const percentDiff = initialBriefcaseValue
+    ? (diff / initialBriefcaseValue) * 100
+    : 0;
 
   const onOpenBriefcase = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.stopPropagation();
     setIsModalOpen(true);
   };
 
-  const showPlus = diff > 0 ? '+' : '';
+  const showPlus = diff >= 0 ? '+' : '';
 
   return (
     <header className="stack header">
       <div className="stack header__currencies">
-        {currencies.map((item) => (
+        {topCurrencies.map((item) => (
           <p key={item.id}>
             {item.name}: ${formatFloat(item.priceUsd)}
           </p>
@@ -33,7 +47,8 @@ export const Header = (): JSX.Element => {
         <p>Briefcase: </p>
         <div className="stack stack_vertical header__briefcase-summary">
           <div>
-            ${initialBriefcaseValue} {showPlus} {formatFloat(diff.toString())}
+            ${formatFloat(initialBriefcaseValue.toString())} {showPlus}{' '}
+            {formatFloat(diff.toString())}
           </div>
           <div>
             ({showPlus}

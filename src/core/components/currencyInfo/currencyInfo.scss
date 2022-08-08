@@ -1,8 +1,8 @@
 .currency-info {
   position: fixed;
   justify-content: flex-start;
-  width: 60%;
-  height: 700px;
+  width: 50%;
+  height: 550px;
   padding: 40px;
   background-color: $background-light;
   border-radius: 10px;
@@ -10,3 +10,6 @@
   font-weight: 300;
   font-size: 22px;
 }
+
+@import "./__heading/currencyInfo__heading.scss";
+@import "./__prices/currencyInfo__prices.scss";

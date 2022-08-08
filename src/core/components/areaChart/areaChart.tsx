@@ -11,7 +11,7 @@ import {
   Legend,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
-import { HistoryItem } from '../../interfaces/history';
+import { HistoryItem } from '../../interfaces/historyItem';
 
 ChartJS.register(
   CategoryScale,
@@ -65,5 +65,5 @@ export const AreaChart = ({ history }: AreaChartProps): JSX.Element => {
     ],
   };
 
-  return <Line options={options} data={data} />;
+  return <Line options={options} data={data} style={{ maxHeight: '450px' }} />;
 };
