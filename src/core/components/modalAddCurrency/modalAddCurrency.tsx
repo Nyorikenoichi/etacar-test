@@ -53,7 +53,7 @@ const ModalAddCurrency = ({ setIsOpen, currency }: ModalAddCurrencyProps) => {
           </button>
           <div className="modal__heading">Adding {currency?.name}</div>
           <p>Please, enter amount of currency to add</p>
-          <div className="stack">
+          <div className="stack modal__input-area">
             <input
               className="modal__input"
               placeholder="Type amount..."

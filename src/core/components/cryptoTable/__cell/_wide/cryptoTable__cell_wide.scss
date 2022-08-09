@@ -1,3 +1,7 @@
 .crypto-table__cell_wide {
   width: 20%;
+
+  @include media-tablet{
+    width: 40%;
+  }
 }
