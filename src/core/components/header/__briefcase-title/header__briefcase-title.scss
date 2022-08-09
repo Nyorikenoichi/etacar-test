@@ -1,0 +1,5 @@
+.header__briefcase-title {
+  @include media-tablet {
+    display: none;
+  }
+}

@@ -1,0 +1,9 @@
+.pagination__item_disabled {
+  pointer-events: none;
+  opacity: 0.5;
+
+  &:hover {
+    background-color: transparent;
+    cursor: default;
+  }
+}

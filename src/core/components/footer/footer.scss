@@ -1,0 +1,10 @@
+.footer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: $footer-height;
+  background-color: $background-footer;
+  font-weight: 300;
+
+}

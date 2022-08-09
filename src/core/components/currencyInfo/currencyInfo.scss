@@ -1,0 +1,31 @@
+.currency-info {
+  position: fixed;
+  justify-content: flex-start;
+  width: 50%;
+  height: 550px;
+  padding: 40px;
+  background-color: $background-light;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.2);
+  font-weight: 300;
+  font-size: 22px;
+
+  @include media-laptop {
+    width: 65%;
+  }
+
+  @include media-tablet {
+    padding: 10px;
+    width: 80%;
+  }
+
+  @include media-mobile {
+    width: 90%;
+    padding: 5px;
+    font-size: 18px;
+  }
+
+}
+
+@import "./__heading/currencyInfo__heading.scss";
+@import "./__prices/currencyInfo__prices.scss";

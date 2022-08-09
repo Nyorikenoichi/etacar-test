@@ -1,0 +1,8 @@
+.currency-info__prices {
+  width: 100%;
+  text-align: center;
+
+  @include media-mobile {
+    flex-wrap: wrap;
+  }
+}

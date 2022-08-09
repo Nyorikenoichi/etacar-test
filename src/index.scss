@@ -1,0 +1,36 @@
+body {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+@import './core/style/constants.scss';
+@import './core/style/fonts.scss';
+@import './core/style/media.scss';
+@import './core/components/stack/stack.scss';
+@import './core/components/header/header.scss';
+@import './core/components/footer/footer.scss';
+@import './core/components/content/content.scss';
+@import './core/components/currencyInfo/currencyInfo.scss';
+@import './core/components/cryptoTable/cryptoTable.scss';
+@import './core/components/pagination/pagination.scss';
+@import './core/components/closeButton/closeButton.scss';
+@import './core/components/modalBriefcase/modalBriefcase.scss';
+@import './core/components/modalAddCurrency/modalAddCurrency.scss';
+@import './core/components/preloader/preloader.scss';
+@import 'core/components/addButton/addButton';
+

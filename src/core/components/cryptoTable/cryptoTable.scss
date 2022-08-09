@@ -1,0 +1,16 @@
+.crypto-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 10px 10px 0 0;
+  font-size: 0.9em;
+  overflow: hidden;
+
+  @include media-tablet {
+    border-radius: 0;
+    font-size: 0.7em;
+  }
+}
+
+@import "./__container/cryptoTable__container.scss";
+@import "./__cell/cryptoTable__cell.scss";
+@import "./__row/cryptoTable__row.scss";
