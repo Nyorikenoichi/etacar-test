@@ -18,20 +18,15 @@ const briefcaseSlice = createSlice({
   initialState,
   reducers: {
     addCurrency: (state, action: PayloadAction<BriefcaseItem>) => {
-      const currencyIndex = state.currencies.findIndex(
-        (item) => item.id === action.payload.id
-      );
+      const currencyIndex = state.currencies.findIndex((item) => item.id === action.payload.id);
       if (currencyIndex === -1) {
         state.currencies = [...state.currencies, action.payload];
       } else {
-        const { initialPrice: oldPrice, count: oldCount } =
-          state.currencies[currencyIndex];
+        const { initialPrice: oldPrice, count: oldCount } = state.currencies[currencyIndex];
 
         const newCount = oldCount + action.payload.count;
         const newPrice =
-          (oldPrice * oldCount +
-            action.payload.initialPrice * action.payload.count) /
-          newCount;
+          (oldPrice * oldCount + action.payload.initialPrice * action.payload.count) / newCount;
 
         state.currencies[currencyIndex].initialPrice = newPrice;
         state.currencies[currencyIndex].count = newCount;
@@ -39,9 +34,7 @@ const briefcaseSlice = createSlice({
       localStorage.setItem(localStorageKey, JSON.stringify(state));
     },
     removeCurrency: (state, action: PayloadAction<string>) => {
-      state.currencies = state.currencies.filter(
-        (item) => item.id !== action.payload
-      );
+      state.currencies = state.currencies.filter((item) => item.id !== action.payload);
       localStorage.setItem(localStorageKey, JSON.stringify(state));
     },
   },

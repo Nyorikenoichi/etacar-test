@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Pagination } from '../pagination/pagination';
 import { formatFloat } from '../../helpers/formatFloat';
 import { CurrencyInfo } from '../../interfaces/currencyInfo';
@@ -7,52 +7,37 @@ import { useNavigate } from 'react-router-dom';
 import { MainRoutes } from '../../constants/mainRoutes';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { laptopMediumWidth, tabletWidth } from '../../constants/screenSizes';
-
-const PageSize = 14;
+import { useWindowWidth } from '../../hooks/useWindowWidth';
+import { useTranslation } from 'react-i18next';
+import { paginationSiblingsCount, tablePageSize } from '../../constants/tableSettings';
 
 export const CryptoTable = () => {
-  const { currencies, error, loading } = useAppSelector(
-    (state) => state.currency
-  );
-
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-  useEffect(() => {
-    const onResize = () => {
-      setWindowWidth(window.innerWidth);
-      console.log(window.innerWidth);
-    };
-
-    window.addEventListener('resize', onResize);
-    return () => window.removeEventListener('resize', onResize);
-  }, [windowWidth]);
+  const { currencies, error, loading } = useAppSelector((state) => state.currency);
+  const windowWidth = useWindowWidth();
+  const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedCurrency, setSelectedCurrency] = useState<CurrencyInfo | null>(
-    null
-  );
+  const [selectedCurrency, setSelectedCurrency] = useState<CurrencyInfo | null>(null);
+
   const [currentPage, setCurrentPage] = useState(1);
-  const navigate = useNavigate();
+  const currentTableData = useMemo(() => {
+    const firstPageIndex = (currentPage - 1) * tablePageSize;
+    const lastPageIndex = firstPageIndex + tablePageSize;
+    return currencies.slice(firstPageIndex, lastPageIndex);
+  }, [currentPage, currencies]);
 
   const onAddCurrency =
-    (currency: CurrencyInfo) =>
-    (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    (currency: CurrencyInfo) => (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
       e.stopPropagation();
       setSelectedCurrency(currency);
       setIsModalOpen(true);
     };
 
-  const onGoToInfo =
-    (id: string) => (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-      e.stopPropagation();
-      navigate(`${MainRoutes.about}?id=${id}`);
-    };
-
-  const currentTableData = useMemo(() => {
-    const firstPageIndex = (currentPage - 1) * PageSize;
-    const lastPageIndex = firstPageIndex + PageSize;
-    return currencies.slice(firstPageIndex, lastPageIndex);
-  }, [currentPage, currencies]);
+  const onGoToInfo = (id: string) => (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    e.stopPropagation();
+    navigate(`${MainRoutes.about}?id=${id}`);
+  };
 
   return (
     <>
@@ -63,32 +48,32 @@ export const CryptoTable = () => {
           <table className="crypto-table">
             <thead>
               <tr className="crypto-table__row crypto-table__row_header">
-                <th className="crypto-table__cell">Rank</th>
+                <th className="crypto-table__cell">{t('crypto_table_rank')}</th>
                 <th className="crypto-table__cell crypto-table__cell_align-left crypto-table__cell_wide">
-                  Name
+                  {t('crypto_table_name')}
                 </th>
-                <th className="crypto-table__cell">Price</th>
+                <th className="crypto-table__cell">{t('crypto_table_price')}</th>
                 {windowWidth > tabletWidth ? (
-                  <th className="crypto-table__cell">Market Cap</th>
+                  <th className="crypto-table__cell">{t('crypto_table_cap')}</th>
                 ) : (
                   ''
                 )}
                 {windowWidth > tabletWidth ? (
-                  <th className="crypto-table__cell">VWAP(24Hr)</th>
+                  <th className="crypto-table__cell">{t('crypto_table_vwap')}</th>
                 ) : (
                   ''
                 )}
                 {windowWidth > laptopMediumWidth ? (
-                  <th className="crypto-table__cell">Supply</th>
+                  <th className="crypto-table__cell">{t('crypto_table_supply')}</th>
                 ) : (
                   ''
                 )}
                 {windowWidth > laptopMediumWidth ? (
-                  <th className="crypto-table__cell">Volume(24Hr)</th>
+                  <th className="crypto-table__cell">{t('crypto_table_volume')}</th>
                 ) : (
                   ''
                 )}
-                <th className="crypto-table__cell">Change(24Hr)</th>
+                <th className="crypto-table__cell">{t('crypto_table_change')}</th>
                 <th />
               </tr>
             </thead>
@@ -104,34 +89,24 @@ export const CryptoTable = () => {
                     <td className="crypto-table__cell crypto-table__cell_align-left">
                       {item.name}
                     </td>
-                    <td className="crypto-table__cell">
-                      ${formatFloat(item.priceUsd)}
-                    </td>
+                    <td className="crypto-table__cell">${formatFloat(item.priceUsd)}</td>
                     {windowWidth > tabletWidth ? (
-                      <td className="crypto-table__cell">
-                        ${formatFloat(item.marketCapUsd)}
-                      </td>
+                      <td className="crypto-table__cell">${formatFloat(item.marketCapUsd)}</td>
                     ) : (
                       ''
                     )}
                     {windowWidth > tabletWidth ? (
-                      <td className="crypto-table__cell">
-                        ${formatFloat(item.vwap24Hr)}
-                      </td>
+                      <td className="crypto-table__cell">${formatFloat(item.vwap24Hr)}</td>
                     ) : (
                       ''
                     )}
                     {windowWidth > laptopMediumWidth ? (
-                      <td className="crypto-table__cell">
-                        {formatFloat(item.supply)}
-                      </td>
+                      <td className="crypto-table__cell">{formatFloat(item.supply)}</td>
                     ) : (
                       ''
                     )}
                     {windowWidth > laptopMediumWidth ? (
-                      <td className="crypto-table__cell">
-                        ${formatFloat(item.volumeUsd24Hr)}
-                      </td>
+                      <td className="crypto-table__cell">${formatFloat(item.volumeUsd24Hr)}</td>
                     ) : (
                       ''
                     )}
@@ -141,10 +116,7 @@ export const CryptoTable = () => {
                         : ''}
                     </td>
                     <td className="crypto-table__cell">
-                      <div
-                        className="cryptoTable__cell_button"
-                        onClick={onAddCurrency(item)}
-                      >
+                      <div className="cryptoTable__cell_button" onClick={onAddCurrency(item)}>
                         +
                       </div>
                     </td>
@@ -156,18 +128,13 @@ export const CryptoTable = () => {
           <Pagination
             currentPage={currentPage}
             totalCount={currencies.length}
-            pageSize={PageSize}
+            pageSize={tablePageSize}
             onPageChange={(page) => setCurrentPage(page)}
-            siblingCount={1}
+            siblingCount={paginationSiblingsCount}
           />
         </div>
       ) : null}
-      {isModalOpen && (
-        <ModalAddCurrency
-          setIsOpen={setIsModalOpen}
-          currency={selectedCurrency}
-        />
-      )}
+      {isModalOpen && <ModalAddCurrency setIsOpen={setIsModalOpen} currency={selectedCurrency} />}
     </>
   );
 };

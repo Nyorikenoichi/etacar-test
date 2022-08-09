@@ -5,6 +5,7 @@
   transition: 300ms;
 
   &:hover {
-    background: $secondary-color-light;
+    transform: scale(1.1);
+    background: $primary-color;
   }
 }

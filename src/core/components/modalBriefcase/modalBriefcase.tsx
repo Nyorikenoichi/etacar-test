@@ -1,12 +1,10 @@
 import React from 'react';
 import { formatFloat } from '../../helpers/formatFloat';
 import { useAppSelector } from '../../hooks/useAppSelector';
-import {
-  calculateCurrentBriefcasePrice,
-  calculateInitialBriefcasePrice,
-} from '../../helpers/briefcaseCalculators';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { removeCurrency } from '../../redux/slices/briefcaseSlice';
+import { useBriefcaseStats } from '../../hooks/useBriefcaseValues';
+import { useTranslation } from 'react-i18next';
 
 interface ModalBriefcaseProps {
   setIsOpen: (option: boolean) => void;
@@ -15,12 +13,8 @@ interface ModalBriefcaseProps {
 export const ModalBriefcase = ({ setIsOpen }: ModalBriefcaseProps) => {
   const dispatch = useAppDispatch();
   const briefcase = useAppSelector((state) => state.briefcase.currencies);
-  const currencies = useAppSelector((state) => state.currency.currencies);
-  const briefcaseInitialPrice = calculateInitialBriefcasePrice(briefcase);
-  const briefcaseCurrentPrice = calculateCurrentBriefcasePrice(
-    briefcase,
-    currencies
-  );
+  const { currentBriefcasePrice, initialBriefcasePrice } = useBriefcaseStats();
+  const { t } = useTranslation();
 
   const onCloseModal = () => {
     setIsOpen(false);
@@ -38,30 +32,31 @@ export const ModalBriefcase = ({ setIsOpen }: ModalBriefcaseProps) => {
           <button className="close-button" onClick={onCloseModal}>
             X
           </button>
-          <div className="modal__heading">Briefcase</div>
+          <div className="modal__heading">{t('modal_briefcase_heading')}</div>
           {briefcase.length > 0 ? (
             <>
-              <p>Initial price was ${briefcaseInitialPrice.toFixed(2)}</p>
-              <p>Current price is ${briefcaseCurrentPrice.toFixed(2)}</p>
+              <p>
+                {t('modal_initial_price')} ${initialBriefcasePrice.toFixed(2)}
+              </p>
+              <p>
+                {t('modal_current_price')} ${currentBriefcasePrice.toFixed(2)}
+              </p>
               <div className="crypto-table__container modal__currencies">
                 <table className="crypto-table">
                   <thead>
                     <tr className="crypto-table__row crypto-table__row_header">
-                      <th className="crypto-table__cell">Name</th>
-                      <th className="crypto-table__cell">Price</th>
-                      <th className="crypto-table__cell">Count</th>
+                      <th className="crypto-table__cell">{t('crypto_table_name')}</th>
+                      <th className="crypto-table__cell">{t('crypto_table_price')}</th>
+                      <th className="crypto-table__cell">{t('crypto_table_count')}</th>
                       <th />
                     </tr>
                   </thead>
                   <tbody>
                     {briefcase.map((item) => (
-                      <tr
-                        className="crypto-table__row crypto-table__row_body"
-                        key={item.id}
-                      >
+                      <tr className="crypto-table__row crypto-table__row_body" key={item.id}>
                         <td className="crypto-table__cell">{item.name}</td>
                         <td className="crypto-table__cell crypto-table__cell_align-left">
-                          ${formatFloat(item.initialPrice.toString())}
+                          ${formatFloat(item.initialPrice)}
                         </td>
                         <td className="crypto-table__cell">{item.count}</td>
                         <td className="crypto-table__cell">
@@ -79,7 +74,7 @@ export const ModalBriefcase = ({ setIsOpen }: ModalBriefcaseProps) => {
               </div>
             </>
           ) : (
-            <p>No currencies yet :(</p>
+            <p>{t('modal_no_currencies')}</p>
           )}
         </div>
       </div>

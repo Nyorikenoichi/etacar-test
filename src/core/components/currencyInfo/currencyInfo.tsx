@@ -8,18 +8,19 @@ import { useAppSelector } from '../../hooks/useAppSelector';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { fetchHistory } from '../../redux/slices/currencySlice';
 import ModalAddCurrency from '../modalAddCurrency/modalAddCurrency';
+import { useHistoryPrices } from '../../hooks/useHistoryPrices';
+import { useTranslation } from 'react-i18next';
 
 export const CurrencyInfo = (): JSX.Element => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
+  const dispatch = useAppDispatch();
+  const { currencies, history, error, loading } = useAppSelector((state) => state.currency);
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const query = useQuery();
   const currencyId = query.get('id');
 
-  const { currencies, history, error, loading } = useAppSelector(
-    (state) => state.currency
-  );
-  const dispatch = useAppDispatch();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const currency = currencies.find((item) => item.id === currencyId);
 
   useEffect(() => {
     if (currencyId != null) {
@@ -27,33 +28,7 @@ export const CurrencyInfo = (): JSX.Element => {
     }
   }, [currencyId, dispatch]);
 
-  const currency = currencies.find((item) => item.id === currencyId);
-
-  const currentPrice = history.length
-    ? history[history.length - 1].priceUsd.toString()
-    : '';
-  const maxPrice = history.length
-    ? history
-        .reduce((previous, current) =>
-          previous.priceUsd > current.priceUsd ? previous : current
-        )
-        .priceUsd.toString()
-    : '';
-  const minPrice = history.length
-    ? history
-        .reduce((previous, current) =>
-          previous.priceUsd < current.priceUsd ? previous : current
-        )
-        .priceUsd.toString()
-    : '';
-  const averagePrice = history.length
-    ? (
-        history.reduce(
-          (previous, current) => previous + parseFloat(current.priceUsd),
-          0
-        ) / history.length
-      ).toString()
-    : '';
+  const { currentPrice, maxPrice, minPrice, averagePrice } = useHistoryPrices(history);
 
   const onBackToMain = () => {
     navigate(MainRoutes.main);
@@ -74,22 +49,28 @@ export const CurrencyInfo = (): JSX.Element => {
           </button>
           <div className="stack">
             <div className="currency-info__heading">{currency?.name}</div>
-            <button className="accept-button" onClick={onAddCurrency}>
-              Add to briefcase
+            <button className="add-button" onClick={onAddCurrency}>
+              {t('add_button')}
             </button>
           </div>
           <div className="stack currency-info__prices">
-            <p>Price: ${formatFloat(currentPrice)}</p>
-            <p>Maximal: ${formatFloat(maxPrice)}</p>
-            <p>Minimal: ${formatFloat(minPrice)}</p>
-            <p>Average: ${formatFloat(averagePrice)}</p>
+            <p>
+              {t('currency_info_price')} ${formatFloat(currentPrice)}
+            </p>
+            <p>
+              {t('currency_info_max')} ${formatFloat(maxPrice)}
+            </p>
+            <p>
+              {t('currency_info_min')} ${formatFloat(minPrice)}
+            </p>
+            <p>
+              {t('currency_info_avg')} ${formatFloat(averagePrice)}
+            </p>
           </div>
           <AreaChart history={history} />
         </div>
       ) : null}
-      {isModalOpen && (
-        <ModalAddCurrency setIsOpen={setIsModalOpen} currency={currency} />
-      )}
+      {isModalOpen && <ModalAddCurrency setIsOpen={setIsModalOpen} currency={currency} />}
     </>
   );
 };
