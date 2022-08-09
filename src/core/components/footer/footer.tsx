@@ -1,10 +1,13 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 export const Footer = (): JSX.Element => {
+  const { t } = useTranslation();
+
   return (
     <footer className="footer">
-      <div>Maksim Maltcev</div>
-      <div>EtaCar Systems</div>
+      <div>{t('author')}</div>
+      <div>{t('company_name')}</div>
     </footer>
   );
 };

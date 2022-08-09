@@ -2,37 +2,22 @@ import React, { useState } from 'react';
 import { formatFloat } from '../../helpers/formatFloat';
 import { ModalBriefcase } from '../modalBriefcase/modalBriefcase';
 import { useAppSelector } from '../../hooks/useAppSelector';
-import {
-  calculateCurrentBriefcasePrice,
-  calculateInitialBriefcasePrice,
-} from '../../helpers/briefcaseCalculators';
+import { useBriefcaseStats } from '../../hooks/useBriefcaseValues';
+import { useTranslation } from 'react-i18next';
 
 export const Header = (): JSX.Element => {
+  const { t } = useTranslation();
   const { currencies } = useAppSelector((state) => state.currency);
-  const briefcase = useAppSelector((state) => state.briefcase);
-
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const topCurrencies = currencies.slice(0, 3);
-  const currentBriefcaseValue = calculateCurrentBriefcasePrice(
-    briefcase.currencies,
-    currencies
-  );
-  const initialBriefcaseValue = calculateInitialBriefcasePrice(
-    briefcase.currencies
-  );
-
-  const diff = currentBriefcaseValue - initialBriefcaseValue;
-  const percentDiff = initialBriefcaseValue
-    ? (diff / initialBriefcaseValue) * 100
-    : 0;
+  const { initialBriefcasePrice, diff, percentDiff, showPlus } =
+    useBriefcaseStats();
 
   const onOpenBriefcase = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.stopPropagation();
     setIsModalOpen(true);
   };
-
-  const showPlus = diff >= 0 ? '+' : '';
 
   return (
     <header className="stack header">
@@ -44,10 +29,10 @@ export const Header = (): JSX.Element => {
         ))}
       </div>
       <div className="stack header__briefcase" onClick={onOpenBriefcase}>
-        <p className="header__briefcase-title">Briefcase: </p>
+        <p className="header__briefcase-title">{t('briefcase_title')}</p>
         <div className="stack stack_vertical header__briefcase-summary">
           <div>
-            ${formatFloat(initialBriefcaseValue)} {showPlus} {formatFloat(diff)}
+            ${formatFloat(initialBriefcasePrice)} {showPlus} {formatFloat(diff)}
           </div>
           <div>
             ({showPlus}

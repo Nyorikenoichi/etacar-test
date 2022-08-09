@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Pagination } from '../pagination/pagination';
 import { formatFloat } from '../../helpers/formatFloat';
 import { CurrencyInfo } from '../../interfaces/currencyInfo';
@@ -7,6 +7,8 @@ import { useNavigate } from 'react-router-dom';
 import { MainRoutes } from '../../constants/mainRoutes';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { laptopMediumWidth, tabletWidth } from '../../constants/screenSizes';
+import { useWindowWidth } from '../../hooks/useWindowWidth';
+import { useTranslation } from 'react-i18next';
 
 const PageSize = 14;
 
@@ -14,25 +16,21 @@ export const CryptoTable = () => {
   const { currencies, error, loading } = useAppSelector(
     (state) => state.currency
   );
-
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-  useEffect(() => {
-    const onResize = () => {
-      setWindowWidth(window.innerWidth);
-      console.log(window.innerWidth);
-    };
-
-    window.addEventListener('resize', onResize);
-    return () => window.removeEventListener('resize', onResize);
-  }, [windowWidth]);
+  const windowWidth = useWindowWidth();
+  const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedCurrency, setSelectedCurrency] = useState<CurrencyInfo | null>(
     null
   );
+
   const [currentPage, setCurrentPage] = useState(1);
-  const navigate = useNavigate();
+  const currentTableData = useMemo(() => {
+    const firstPageIndex = (currentPage - 1) * PageSize;
+    const lastPageIndex = firstPageIndex + PageSize;
+    return currencies.slice(firstPageIndex, lastPageIndex);
+  }, [currentPage, currencies]);
 
   const onAddCurrency =
     (currency: CurrencyInfo) =>
@@ -48,12 +46,6 @@ export const CryptoTable = () => {
       navigate(`${MainRoutes.about}?id=${id}`);
     };
 
-  const currentTableData = useMemo(() => {
-    const firstPageIndex = (currentPage - 1) * PageSize;
-    const lastPageIndex = firstPageIndex + PageSize;
-    return currencies.slice(firstPageIndex, lastPageIndex);
-  }, [currentPage, currencies]);
-
   return (
     <>
       {loading && <div className="preloader" />}
@@ -63,32 +55,44 @@ export const CryptoTable = () => {
           <table className="crypto-table">
             <thead>
               <tr className="crypto-table__row crypto-table__row_header">
-                <th className="crypto-table__cell">Rank</th>
+                <th className="crypto-table__cell">{t('crypto_table_rank')}</th>
                 <th className="crypto-table__cell crypto-table__cell_align-left crypto-table__cell_wide">
-                  Name
+                  {t('crypto_table_name')}
                 </th>
-                <th className="crypto-table__cell">Price</th>
+                <th className="crypto-table__cell">
+                  {t('crypto_table_price')}
+                </th>
                 {windowWidth > tabletWidth ? (
-                  <th className="crypto-table__cell">Market Cap</th>
+                  <th className="crypto-table__cell">
+                    {t('crypto_table_cap')}
+                  </th>
                 ) : (
                   ''
                 )}
                 {windowWidth > tabletWidth ? (
-                  <th className="crypto-table__cell">VWAP(24Hr)</th>
+                  <th className="crypto-table__cell">
+                    {t('crypto_table_vwap')}
+                  </th>
                 ) : (
                   ''
                 )}
                 {windowWidth > laptopMediumWidth ? (
-                  <th className="crypto-table__cell">Supply</th>
+                  <th className="crypto-table__cell">
+                    {t('crypto_table_supply')}
+                  </th>
                 ) : (
                   ''
                 )}
                 {windowWidth > laptopMediumWidth ? (
-                  <th className="crypto-table__cell">Volume(24Hr)</th>
+                  <th className="crypto-table__cell">
+                    {t('crypto_table_volume')}
+                  </th>
                 ) : (
                   ''
                 )}
-                <th className="crypto-table__cell">Change(24Hr)</th>
+                <th className="crypto-table__cell">
+                  {t('crypto_table_change')}
+                </th>
                 <th />
               </tr>
             </thead>

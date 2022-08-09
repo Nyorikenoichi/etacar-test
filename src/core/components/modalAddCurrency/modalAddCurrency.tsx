@@ -2,6 +2,7 @@ import React, { ChangeEvent, useState } from 'react';
 import { CurrencyInfo } from '../../interfaces/currencyInfo';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { addCurrency } from '../../redux/slices/briefcaseSlice';
+import { useTranslation } from 'react-i18next';
 
 interface ModalAddCurrencyProps {
   setIsOpen: (option: boolean) => void;
@@ -11,6 +12,7 @@ interface ModalAddCurrencyProps {
 const ModalAddCurrency = ({ setIsOpen, currency }: ModalAddCurrencyProps) => {
   const dispatch = useAppDispatch();
   const [count, setCount] = useState<number | string>('');
+  const { t } = useTranslation();
 
   const onInputAmount = (e: ChangeEvent<HTMLInputElement>) => {
     const input = e.target.value;
@@ -51,8 +53,10 @@ const ModalAddCurrency = ({ setIsOpen, currency }: ModalAddCurrencyProps) => {
           <button className="close-button" onClick={onCloseModal}>
             X
           </button>
-          <div className="modal__heading">Adding {currency?.name}</div>
-          <p>Please, enter amount of currency to add</p>
+          <div className="modal__heading">
+            {t('modal_currency_heading')} {currency?.name}
+          </div>
+          <p>{t('modal_currency_message')}</p>
           <div className="stack modal__input-area">
             <input
               className="modal__input"
@@ -66,7 +70,7 @@ const ModalAddCurrency = ({ setIsOpen, currency }: ModalAddCurrencyProps) => {
               onClick={onAddCurrency}
               disabled={count == '' || +count <= 0}
             >
-              Add
+              {t('modal_currency_button')}
             </button>
           </div>
         </div>
