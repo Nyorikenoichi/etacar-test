@@ -47,12 +47,11 @@ export const Header = (): JSX.Element => {
         <p className="header__briefcase-title">Briefcase: </p>
         <div className="stack stack_vertical header__briefcase-summary">
           <div>
-            ${formatFloat(initialBriefcaseValue.toString())} {showPlus}{' '}
-            {formatFloat(diff.toString())}
+            ${formatFloat(initialBriefcaseValue)} {showPlus} {formatFloat(diff)}
           </div>
           <div>
             ({showPlus}
-            {formatFloat(percentDiff.toFixed(2))}%)
+            {formatFloat(percentDiff)}%)
           </div>
         </div>
       </div>

@@ -61,7 +61,7 @@ export const ModalBriefcase = ({ setIsOpen }: ModalBriefcaseProps) => {
                       >
                         <td className="crypto-table__cell">{item.name}</td>
                         <td className="crypto-table__cell crypto-table__cell_align-left">
-                          ${formatFloat(item.initialPrice.toString())}
+                          ${formatFloat(item.initialPrice)}
                         </td>
                         <td className="crypto-table__cell">{item.count}</td>
                         <td className="crypto-table__cell">
