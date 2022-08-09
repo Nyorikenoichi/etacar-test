@@ -24,7 +24,6 @@ export const Pagination = ({
     pageSize,
   });
   const lastPage = paginationRange[paginationRange.length - 1];
-
   if (currentPage === 0 || paginationRange.length < 2) {
     return null;
   }
@@ -32,19 +31,15 @@ export const Pagination = ({
   const onNext = () => {
     onPageChange(currentPage + 1);
   };
-
   const onPrevious = () => {
     onPageChange(currentPage - 1);
   };
-
   const onChangePage = (pageNumber: number) => () => {
     onPageChange(pageNumber);
   };
 
   const isFirstPage = () => (currentPage === 1 ? ' pagination__item_disabled' : '');
-
   const isLastPage = () => (currentPage === lastPage ? ' pagination__item_disabled' : '');
-
   const isCurrentPage = (pageNumber: string | number) =>
     currentPage === pageNumber ? ' pagination__item_selected' : '';
 
@@ -53,16 +48,12 @@ export const Pagination = ({
       <li className={`pagination__item${isFirstPage()}`} onClick={onPrevious}>
         <div className="pagination__arrow pagination__arrow_left" />
       </li>
-      {paginationRange.map((pageNumber) => {
-        if (pageNumber === dots) {
-          return (
-            <li key={uuidv4()} className="pagination__item pagination__item_dots">
-              &#8230;
-            </li>
-          );
-        }
-
-        return (
+      {paginationRange.map((pageNumber) =>
+        pageNumber === dots ? (
+          <li key={uuidv4()} className="pagination__item pagination__item_dots">
+            &#8230;
+          </li>
+        ) : (
           <li
             key={uuidv4()}
             className={`pagination__item${isCurrentPage(pageNumber)}`}
@@ -70,8 +61,8 @@ export const Pagination = ({
           >
             {pageNumber}
           </li>
-        );
-      })}
+        )
+      )}
       <li className={`pagination__item${isLastPage()}`} onClick={onNext}>
         <div className="pagination__arrow pagination__arrow_right" />
       </li>
