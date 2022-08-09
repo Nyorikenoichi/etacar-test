@@ -19,14 +19,11 @@ const initialState: InitialState = {
 
 const apiUrl = 'https://api.coincap.io/v2/assets';
 
-export const fetchCurrencies = createAsyncThunk(
-  'currency/fetchCurrencies',
-  async () => {
-    const response = await axios.get(apiUrl);
-    const apiData = await response.data;
-    return apiData.data;
-  }
-);
+export const fetchCurrencies = createAsyncThunk('currency/fetchCurrencies', async () => {
+  const response = await axios.get(apiUrl);
+  const apiData = await response.data;
+  return apiData.data;
+});
 
 export const fetchHistory = createAsyncThunk(
   'currency/fetchCurrencyHistory',
@@ -45,14 +42,11 @@ const currencySlice = createSlice({
     builder.addCase(fetchCurrencies.pending, (state) => {
       state.loading = true;
     });
-    builder.addCase(
-      fetchCurrencies.fulfilled,
-      (state, action: PayloadAction<CurrencyInfo[]>) => {
-        state.loading = false;
-        state.currencies = action.payload;
-        state.error = '';
-      }
-    );
+    builder.addCase(fetchCurrencies.fulfilled, (state, action: PayloadAction<CurrencyInfo[]>) => {
+      state.loading = false;
+      state.currencies = action.payload;
+      state.error = '';
+    });
     builder.addCase(fetchCurrencies.rejected, (state, action) => {
       state.loading = false;
       state.currencies = [];
@@ -61,14 +55,11 @@ const currencySlice = createSlice({
     builder.addCase(fetchHistory.pending, (state) => {
       state.loading = true;
     });
-    builder.addCase(
-      fetchHistory.fulfilled,
-      (state, action: PayloadAction<HistoryItem[]>) => {
-        state.loading = false;
-        state.history = action.payload;
-        state.error = '';
-      }
-    );
+    builder.addCase(fetchHistory.fulfilled, (state, action: PayloadAction<HistoryItem[]>) => {
+      state.loading = false;
+      state.history = action.payload;
+      state.error = '';
+    });
     builder.addCase(fetchHistory.rejected, (state, action) => {
       state.loading = false;
       state.history = [];

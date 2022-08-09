@@ -45,24 +45,15 @@ export const ModalBriefcase = ({ setIsOpen }: ModalBriefcaseProps) => {
                 <table className="crypto-table">
                   <thead>
                     <tr className="crypto-table__row crypto-table__row_header">
-                      <th className="crypto-table__cell">
-                        {t('crypto_table_name')}
-                      </th>
-                      <th className="crypto-table__cell">
-                        {t('crypto_table_price')}
-                      </th>
-                      <th className="crypto-table__cell">
-                        {t('crypto_table_count')}
-                      </th>
+                      <th className="crypto-table__cell">{t('crypto_table_name')}</th>
+                      <th className="crypto-table__cell">{t('crypto_table_price')}</th>
+                      <th className="crypto-table__cell">{t('crypto_table_count')}</th>
                       <th />
                     </tr>
                   </thead>
                   <tbody>
                     {briefcase.map((item) => (
-                      <tr
-                        className="crypto-table__row crypto-table__row_body"
-                        key={item.id}
-                      >
+                      <tr className="crypto-table__row crypto-table__row_body" key={item.id}>
                         <td className="crypto-table__cell">{item.name}</td>
                         <td className="crypto-table__cell crypto-table__cell_align-left">
                           ${formatFloat(item.initialPrice)}

@@ -41,11 +41,9 @@ export const Pagination = ({
     onPageChange(pageNumber);
   };
 
-  const isFirstPage = () =>
-    currentPage === 1 ? ' pagination__item_disabled' : '';
+  const isFirstPage = () => (currentPage === 1 ? ' pagination__item_disabled' : '');
 
-  const isLastPage = () =>
-    currentPage === lastPage ? ' pagination__item_disabled' : '';
+  const isLastPage = () => (currentPage === lastPage ? ' pagination__item_disabled' : '');
 
   const isCurrentPage = (pageNumber: string | number) =>
     currentPage === pageNumber ? ' pagination__item_selected' : '';
@@ -58,10 +56,7 @@ export const Pagination = ({
       {paginationRange.map((pageNumber) => {
         if (pageNumber === dots) {
           return (
-            <li
-              key={uuidv4()}
-              className="pagination__item pagination__item_dots"
-            >
+            <li key={uuidv4()} className="pagination__item pagination__item_dots">
               &#8230;
             </li>
           );

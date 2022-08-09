@@ -11,8 +11,7 @@ export const Header = (): JSX.Element => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const topCurrencies = currencies.slice(0, 3);
-  const { initialBriefcasePrice, diff, percentDiff, showPlus } =
-    useBriefcaseStats();
+  const { initialBriefcasePrice, diff, percentDiff, showPlus } = useBriefcaseStats();
 
   const onOpenBriefcase = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.stopPropagation();

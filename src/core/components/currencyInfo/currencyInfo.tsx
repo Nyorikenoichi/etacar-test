@@ -13,9 +13,7 @@ import { useTranslation } from 'react-i18next';
 
 export const CurrencyInfo = (): JSX.Element => {
   const dispatch = useAppDispatch();
-  const { currencies, history, error, loading } = useAppSelector(
-    (state) => state.currency
-  );
+  const { currencies, history, error, loading } = useAppSelector((state) => state.currency);
   const { t } = useTranslation();
   const navigate = useNavigate();
   const query = useQuery();
@@ -30,8 +28,7 @@ export const CurrencyInfo = (): JSX.Element => {
     }
   }, [currencyId, dispatch]);
 
-  const { currentPrice, maxPrice, minPrice, averagePrice } =
-    useHistoryPrices(history);
+  const { currentPrice, maxPrice, minPrice, averagePrice } = useHistoryPrices(history);
 
   const onBackToMain = () => {
     navigate(MainRoutes.main);
@@ -73,9 +70,7 @@ export const CurrencyInfo = (): JSX.Element => {
           <AreaChart history={history} />
         </div>
       ) : null}
-      {isModalOpen && (
-        <ModalAddCurrency setIsOpen={setIsModalOpen} currency={currency} />
-      )}
+      {isModalOpen && <ModalAddCurrency setIsOpen={setIsModalOpen} currency={currency} />}
     </>
   );
 };
