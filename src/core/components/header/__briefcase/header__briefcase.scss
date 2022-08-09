@@ -1,16 +1,26 @@
 .header__briefcase {
-  justify-content: center;
+  justify-content: space-evenly;
   width: 20%;
-  height: 60%;
-  margin: 0 150px;
+  height: 65%;
+  margin: 0 150px 0 0;
   padding: 0 15px;
   border: 2px solid $secondary-color;
   border-radius: 10px;
-  font-size: 22px;
   transition: 300ms;
   cursor: pointer;
 
   &:hover {
     background: $secondary-color;
+  }
+
+  @include media-laptop {
+    margin: 0 50px 0 0;
+    width: 30%;
+  }
+
+  @include  media-tablet {
+    margin: 0 10px 0 0;
+    padding: 0 5px;
+    width: 20%;
   }
 }

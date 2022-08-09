@@ -12,7 +12,7 @@ interface ModalBriefcaseProps {
   setIsOpen: (option: boolean) => void;
 }
 
-const ModalBriefcase = ({ setIsOpen }: ModalBriefcaseProps) => {
+export const ModalBriefcase = ({ setIsOpen }: ModalBriefcaseProps) => {
   const dispatch = useAppDispatch();
   const briefcase = useAppSelector((state) => state.briefcase.currencies);
   const currencies = useAppSelector((state) => state.currency.currencies);
@@ -86,5 +86,3 @@ const ModalBriefcase = ({ setIsOpen }: ModalBriefcaseProps) => {
     </>
   );
 };
-
-export default ModalBriefcase;

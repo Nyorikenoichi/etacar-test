@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Pagination } from '../pagination/pagination';
 import { formatFloat } from '../../helpers/formatFloat';
 import { CurrencyInfo } from '../../interfaces/currencyInfo';
@@ -6,6 +6,7 @@ import ModalAddCurrency from '../modalAddCurrency/modalAddCurrency';
 import { useNavigate } from 'react-router-dom';
 import { MainRoutes } from '../../constants/mainRoutes';
 import { useAppSelector } from '../../hooks/useAppSelector';
+import { laptopMediumWidth, tabletWidth } from '../../constants/screenSizes';
 
 const PageSize = 14;
 
@@ -13,6 +14,18 @@ export const CryptoTable = () => {
   const { currencies, error, loading } = useAppSelector(
     (state) => state.currency
   );
+
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const onResize = () => {
+      setWindowWidth(window.innerWidth);
+      console.log(window.innerWidth);
+    };
+
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
+  }, [windowWidth]);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedCurrency, setSelectedCurrency] = useState<CurrencyInfo | null>(
@@ -55,10 +68,26 @@ export const CryptoTable = () => {
                   Name
                 </th>
                 <th className="crypto-table__cell">Price</th>
-                <th className="crypto-table__cell">Market Cap</th>
-                <th className="crypto-table__cell">VWAP(24Hr)</th>
-                <th className="crypto-table__cell">Supply</th>
-                <th className="crypto-table__cell">Volume(24Hr)</th>
+                {windowWidth > tabletWidth ? (
+                  <th className="crypto-table__cell">Market Cap</th>
+                ) : (
+                  ''
+                )}
+                {windowWidth > tabletWidth ? (
+                  <th className="crypto-table__cell">VWAP(24Hr)</th>
+                ) : (
+                  ''
+                )}
+                {windowWidth > laptopMediumWidth ? (
+                  <th className="crypto-table__cell">Supply</th>
+                ) : (
+                  ''
+                )}
+                {windowWidth > laptopMediumWidth ? (
+                  <th className="crypto-table__cell">Volume(24Hr)</th>
+                ) : (
+                  ''
+                )}
                 <th className="crypto-table__cell">Change(24Hr)</th>
                 <th />
               </tr>
@@ -78,18 +107,34 @@ export const CryptoTable = () => {
                     <td className="crypto-table__cell">
                       ${formatFloat(item.priceUsd)}
                     </td>
-                    <td className="crypto-table__cell">
-                      ${formatFloat(item.marketCapUsd)}
-                    </td>
-                    <td className="crypto-table__cell">
-                      ${formatFloat(item.vwap24Hr)}
-                    </td>
-                    <td className="crypto-table__cell">
-                      {formatFloat(item.supply)}
-                    </td>
-                    <td className="crypto-table__cell">
-                      ${formatFloat(item.volumeUsd24Hr)}
-                    </td>
+                    {windowWidth > tabletWidth ? (
+                      <td className="crypto-table__cell">
+                        ${formatFloat(item.marketCapUsd)}
+                      </td>
+                    ) : (
+                      ''
+                    )}
+                    {windowWidth > tabletWidth ? (
+                      <td className="crypto-table__cell">
+                        ${formatFloat(item.vwap24Hr)}
+                      </td>
+                    ) : (
+                      ''
+                    )}
+                    {windowWidth > laptopMediumWidth ? (
+                      <td className="crypto-table__cell">
+                        {formatFloat(item.supply)}
+                      </td>
+                    ) : (
+                      ''
+                    )}
+                    {windowWidth > laptopMediumWidth ? (
+                      <td className="crypto-table__cell">
+                        ${formatFloat(item.volumeUsd24Hr)}
+                      </td>
+                    ) : (
+                      ''
+                    )}
                     <td className="crypto-table__cell">
                       {typeof item.changePercent24Hr === 'string'
                         ? `${formatFloat(item.changePercent24Hr)}%`

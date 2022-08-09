@@ -1,0 +1,7 @@
+.header__currency {
+  width: auto;
+
+  @include media-laptop {
+    width: 100px;
+  }
+}

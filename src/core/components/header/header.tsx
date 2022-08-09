@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { formatFloat } from '../../helpers/formatFloat';
-import ModalBriefcase from '../modalBriefcase/modalBriefcase';
+import { ModalBriefcase } from '../modalBriefcase/modalBriefcase';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import {
   calculateCurrentBriefcasePrice,
@@ -38,13 +38,13 @@ export const Header = (): JSX.Element => {
     <header className="stack header">
       <div className="stack header__currencies">
         {topCurrencies.map((item) => (
-          <p key={item.id}>
+          <p className="header__currency" key={item.id}>
             {item.name}: ${formatFloat(item.priceUsd)}
           </p>
         ))}
       </div>
       <div className="stack header__briefcase" onClick={onOpenBriefcase}>
-        <p>Briefcase: </p>
+        <p className="header__briefcase-title">Briefcase: </p>
         <div className="stack stack_vertical header__briefcase-summary">
           <div>
             ${formatFloat(initialBriefcaseValue.toString())} {showPlus}{' '}
