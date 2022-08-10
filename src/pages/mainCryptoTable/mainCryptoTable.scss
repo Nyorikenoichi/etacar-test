@@ -11,6 +11,6 @@
   }
 }
 
-@import "./__container/cryptoTable__container.scss";
-@import "./__cell/cryptoTable__cell.scss";
-@import "./__row/cryptoTable__row.scss";
+@import "__container/cryptoTable__container";
+@import "__cell/cryptoTable__cell";
+@import "__row/cryptoTable__row";

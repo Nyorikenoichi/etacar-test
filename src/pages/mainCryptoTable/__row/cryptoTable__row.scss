@@ -5,6 +5,6 @@
 
 }
 
-@import "./_body/cryptoTable__row_body.scss";
-@import "./_header/cryptoTable__row_header.scss";
-@import "./_clickable/cryptoTable__row_clickable.scss";
+@import "_body/cryptoTable__row_body";
+@import "_header/cryptoTable__row_header";
+@import "_clickable/cryptoTable__row_clickable";

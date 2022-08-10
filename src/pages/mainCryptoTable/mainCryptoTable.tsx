@@ -1,17 +1,17 @@
 import React, { useMemo, useState } from 'react';
-import { Pagination } from '../pagination/pagination';
-import { formatFloat } from '../../helpers/formatFloat';
-import { CurrencyInfo } from '../../interfaces/currencyInfo';
-import ModalAddCurrency from '../modalAddCurrency/modalAddCurrency';
+import { Pagination } from '../../core/components/pagination/pagination';
+import { formatFloat } from '../../core/lib/helpers/formatFloat';
+import { CurrencyInfo } from '../../core/lib/interfaces/currencyInfo';
+import ModalAddCurrency from '../../core/components/modalAddCurrency/modalAddCurrency';
 import { useNavigate } from 'react-router-dom';
-import { MainRoutes } from '../../constants/mainRoutes';
-import { useAppSelector } from '../../hooks/useAppSelector';
-import { laptopMediumWidth, tabletWidth } from '../../constants/screenSizes';
-import { useWindowWidth } from '../../hooks/useWindowWidth';
+import { MainRoutes } from '../../core/lib/constants/mainRoutes';
+import { useAppSelector } from '../../core/lib/hooks/useAppSelector';
+import { laptopMediumWidth, tabletWidth } from '../../core/lib/constants/screenSizes';
+import { useWindowWidth } from '../../core/lib/hooks/useWindowWidth';
 import { useTranslation } from 'react-i18next';
-import { paginationSiblingsCount, tablePageSize } from '../../constants/tableSettings';
+import { paginationSiblingsCount, tablePageSize } from '../../core/lib/constants/tableSettings';
 
-export const CryptoTable = () => {
+export const MainCryptoTable = () => {
   const { currencies, error, loading } = useAppSelector((state) => state.currency);
   const windowWidth = useWindowWidth();
   const navigate = useNavigate();
@@ -36,7 +36,7 @@ export const CryptoTable = () => {
 
   const onGoToInfo = (id: string) => (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.stopPropagation();
-    navigate(`${MainRoutes.about}?id=${id}`);
+    navigate(`${MainRoutes.info}?id=${id}`);
   };
 
   return (

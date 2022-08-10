@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useState } from 'react';
-import { CurrencyInfo } from '../../interfaces/currencyInfo';
-import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { CurrencyInfo } from '../../lib/interfaces/currencyInfo';
+import { useAppDispatch } from '../../lib/hooks/useAppDispatch';
 import { addCurrency } from '../../redux/slices/briefcaseSlice';
 import { useTranslation } from 'react-i18next';
 

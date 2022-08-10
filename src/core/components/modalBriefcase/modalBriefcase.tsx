@@ -1,9 +1,9 @@
 import React from 'react';
-import { formatFloat } from '../../helpers/formatFloat';
-import { useAppSelector } from '../../hooks/useAppSelector';
-import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { formatFloat } from '../../lib/helpers/formatFloat';
+import { useAppSelector } from '../../lib/hooks/useAppSelector';
+import { useAppDispatch } from '../../lib/hooks/useAppDispatch';
 import { removeCurrency } from '../../redux/slices/briefcaseSlice';
-import { useBriefcaseStats } from '../../hooks/useBriefcaseValues';
+import { useBriefcaseStats } from '../../lib/hooks/useBriefcaseValues';
 import { useTranslation } from 'react-i18next';
 
 interface ModalBriefcaseProps {
