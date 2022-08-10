@@ -12,17 +12,18 @@ interface ModalAddCurrencyProps {
 const ModalAddCurrency = ({ setIsOpen, currency }: ModalAddCurrencyProps) => {
   const dispatch = useAppDispatch();
   const [count, setCount] = useState<number | string>('');
+  const [showWarning, setShowWarning] = useState<boolean>(false);
   const { t } = useTranslation();
+
+  const validationRegexp = /^([0-9]+)(\.)?([0-9]+)?$/;
 
   const onInputAmount = (e: ChangeEvent<HTMLInputElement>) => {
     const input = e.target.value;
-    if (input.match(/^([0-9]+)?(\.)?([0-9]+)?$/)) {
-      setCount(input);
-    }
+    setCount(input);
   };
 
   const onInputBlur = () => {
-    if (typeof count === 'string') {
+    if (typeof count === 'string' && count.match(validationRegexp) && currency) {
       setCount(parseFloat(count) || '');
     }
   };
@@ -32,7 +33,8 @@ const ModalAddCurrency = ({ setIsOpen, currency }: ModalAddCurrencyProps) => {
   };
 
   const onAddCurrency = () => {
-    if (currency) {
+    if (count.toString().match(/^([0-9]+)(\.)?([0-9]+)?$/) && currency) {
+      setShowWarning(false);
       dispatch(
         addCurrency({
           id: currency.id,
@@ -41,8 +43,10 @@ const ModalAddCurrency = ({ setIsOpen, currency }: ModalAddCurrencyProps) => {
           count: +count,
         })
       );
+      setIsOpen(false);
+    } else {
+      setShowWarning(true);
     }
-    setIsOpen(false);
   };
 
   return (
@@ -59,20 +63,20 @@ const ModalAddCurrency = ({ setIsOpen, currency }: ModalAddCurrencyProps) => {
           <p>{t('modal_currency_message')}</p>
           <div className="stack modal__input-area">
             <input
+              autoFocus={true}
               className="modal__input"
               placeholder="Type amount..."
               value={count}
               onChange={onInputAmount}
               onBlur={onInputBlur}
             />
-            <button
-              className="accept-button"
-              onClick={onAddCurrency}
-              disabled={count == '' || +count <= 0}
-            >
+            <button className="add-button" onClick={onAddCurrency}>
               {t('modal_currency_button')}
             </button>
           </div>
+          {showWarning && (
+            <div className={'modal__warning-message'}>Please, input correct numerical value!</div>
+          )}
         </div>
       </div>
     </>
