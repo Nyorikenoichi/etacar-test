@@ -1,4 +1,4 @@
 export enum MainRoutes {
   main = '/',
-  about = '/about',
+  info = '/info',
 }
