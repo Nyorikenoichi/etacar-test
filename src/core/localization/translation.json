@@ -17,7 +17,7 @@
       "currency_info_avg": "Average:",
       "modal_briefcase_heading": "Briefcase",
       "modal_currency_heading": "Adding",
-      "modal_currency_message": "Adding",
+      "modal_currency_message": "Please, enter amount of currency to add",
       "modal_currency_button": "Add",
       "modal_initial_price": "Initial price was",
       "modal_current_price": "Current price is",
