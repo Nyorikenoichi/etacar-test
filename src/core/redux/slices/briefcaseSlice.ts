@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { BriefcaseItem } from '../../interfaces/briefcaseItem';
+import { BriefcaseItem } from '../../lib/interfaces/briefcaseItem';
 
 const localStorageKey = 'briefcase';
 

@@ -11,7 +11,7 @@ import {
   Legend,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
-import { HistoryItem } from '../../interfaces/historyItem';
+import { HistoryItem } from '../../lib/interfaces/historyItem';
 
 ChartJS.register(
   CategoryScale,

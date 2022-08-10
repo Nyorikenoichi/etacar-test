@@ -1,5 +1,5 @@
 import React from 'react';
-import { dots, usePagination } from '../../hooks/usePagination';
+import { dots, usePagination } from '../../lib/hooks/usePagination';
 import { v4 as uuidv4 } from 'uuid';
 
 interface CryptoTablePaginationProps {

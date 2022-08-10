@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { formatFloat } from '../../helpers/formatFloat';
+import { formatFloat } from '../../lib/helpers/formatFloat';
 import { ModalBriefcase } from '../modalBriefcase/modalBriefcase';
-import { useAppSelector } from '../../hooks/useAppSelector';
-import { useBriefcaseStats } from '../../hooks/useBriefcaseValues';
+import { useAppSelector } from '../../lib/hooks/useAppSelector';
+import { useBriefcaseStats } from '../../lib/hooks/useBriefcaseValues';
 import { useTranslation } from 'react-i18next';
 
 export const Header = (): JSX.Element => {
