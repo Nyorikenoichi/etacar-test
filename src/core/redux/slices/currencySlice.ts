@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { CurrencyInfo } from '../../interfaces/currencyInfo';
-import { HistoryItem } from '../../interfaces/historyItem';
+import { CurrencyInfo } from '../../lib/interfaces/currencyInfo';
+import { HistoryItem } from '../../lib/interfaces/historyItem';
 
 interface InitialState {
   loading: boolean;
