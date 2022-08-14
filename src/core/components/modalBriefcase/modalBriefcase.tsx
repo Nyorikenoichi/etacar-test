@@ -5,6 +5,8 @@ import { useAppDispatch } from '../../lib/hooks/useAppDispatch';
 import { removeCurrency } from '../../redux/slices/briefcaseSlice';
 import { useBriefcaseStats } from '../../lib/hooks/useBriefcaseValues';
 import { useTranslation } from 'react-i18next';
+import { Button } from '../../common/button/button';
+import { ButtonVariants } from '../../lib/constants/buttonVariants';
 
 interface ModalBriefcaseProps {
   setIsOpen: (option: boolean) => void;
@@ -29,9 +31,9 @@ export const ModalBriefcase = ({ setIsOpen }: ModalBriefcaseProps) => {
       <div className="modal__background" onClick={onCloseModal} />
       <div className="modal">
         <div className="stack stack_vertical modal__container">
-          <button className="close-button" onClick={onCloseModal}>
+          <Button variant={ButtonVariants.close} onClick={onCloseModal}>
             X
-          </button>
+          </Button>
           <div className="modal__heading">{t('modal_briefcase_heading')}</div>
           {briefcase.length > 0 ? (
             <>

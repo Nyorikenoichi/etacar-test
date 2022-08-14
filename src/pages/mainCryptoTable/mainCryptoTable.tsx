@@ -10,6 +10,7 @@ import { laptopMediumWidth, tabletWidth } from '../../core/lib/constants/screenS
 import { useWindowWidth } from '../../core/lib/hooks/useWindowWidth';
 import { useTranslation } from 'react-i18next';
 import { paginationSiblingsCount, tablePageSize } from '../../core/lib/constants/tableSettings';
+import { Preloader } from '../../core/common/preloader/preloader';
 
 export const MainCryptoTable = () => {
   const { currencies, error, loading } = useAppSelector((state) => state.currency);
@@ -41,7 +42,7 @@ export const MainCryptoTable = () => {
 
   return (
     <>
-      {loading && <div className="preloader" />}
+      {loading && <Preloader />}
       {!loading && error ? <div>Error: {error}</div> : null}
       {!loading && currencies.length ? (
         <div className="stack stack_vertical crypto-table__container">
