@@ -5,7 +5,7 @@ import { useAppDispatch } from './core/lib/hooks/useAppDispatch';
 import { fetchCurrencies } from './core/redux/slices/currencySlice';
 import { Route, Routes } from 'react-router-dom';
 import { MainRoutes } from './core/lib/constants/mainRoutes';
-import { MainCryptoTable } from './pages/mainCryptoTable/mainCryptoTable';
+import { Main } from './pages/main/main';
 import { CurrencyInfo } from './pages/currencyInfo/currencyInfo';
 
 export const App = (): JSX.Element => {
@@ -20,7 +20,7 @@ export const App = (): JSX.Element => {
       <Header />
       <section className="stack stack_vertical content">
         <Routes>
-          <Route path={MainRoutes.main} element={<MainCryptoTable />} />
+          <Route path={MainRoutes.main} element={<Main />} />
           <Route path={MainRoutes.info} element={<CurrencyInfo />} />
         </Routes>
       </section>

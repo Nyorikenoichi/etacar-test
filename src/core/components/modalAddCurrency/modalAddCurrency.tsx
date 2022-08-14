@@ -1,10 +1,11 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { useState } from 'react';
 import { CurrencyInfo } from '../../lib/interfaces/currencyInfo';
 import { useAppDispatch } from '../../lib/hooks/useAppDispatch';
 import { addCurrency } from '../../redux/slices/briefcaseSlice';
 import { useTranslation } from 'react-i18next';
 import { Button } from '../../common/button/button';
 import { ButtonVariants } from '../../lib/constants/buttonVariants';
+import { NumberInput } from '../../common/numberInput/numberInput';
 
 interface ModalAddCurrencyProps {
   setIsOpen: (option: boolean) => void;
@@ -13,36 +14,25 @@ interface ModalAddCurrencyProps {
 
 const ModalAddCurrency = ({ setIsOpen, currency }: ModalAddCurrencyProps) => {
   const dispatch = useAppDispatch();
-  const [count, setCount] = useState<number | string>('');
+  const [count, setCount] = useState<string>('');
   const [showWarning, setShowWarning] = useState<boolean>(false);
   const { t } = useTranslation();
 
   const validationRegexp = /^([0-9]+)(\.)?([0-9]+)?$/;
-
-  const onInputAmount = (e: ChangeEvent<HTMLInputElement>) => {
-    const input = e.target.value;
-    setCount(input);
-  };
-
-  const onInputBlur = () => {
-    if (typeof count === 'string' && count.match(validationRegexp) && currency) {
-      setCount(parseFloat(count) || '');
-    }
-  };
 
   const onCloseModal = () => {
     setIsOpen(false);
   };
 
   const onAddCurrency = () => {
-    if (count.toString().match(/^([0-9]+)(\.)?([0-9]+)?$/) && currency) {
+    if (count.match(validationRegexp) && currency) {
       setShowWarning(false);
       dispatch(
         addCurrency({
           id: currency.id,
           name: currency.name,
           initialPrice: parseFloat(currency.priceUsd),
-          count: +count,
+          count: parseFloat(count),
         })
       );
       setIsOpen(false);
@@ -64,13 +54,11 @@ const ModalAddCurrency = ({ setIsOpen, currency }: ModalAddCurrencyProps) => {
           </div>
           <p>{t('modal_currency_message')}</p>
           <div className="stack modal__input-area">
-            <input
+            <NumberInput
               autoFocus={true}
-              className="modal__input"
               placeholder="Type amount..."
               value={count}
-              onChange={onInputAmount}
-              onBlur={onInputBlur}
+              setValue={setCount}
             />
             <Button variant={ButtonVariants.add} onClick={onAddCurrency}>
               {t('modal_currency_button')}

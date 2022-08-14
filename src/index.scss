@@ -24,13 +24,15 @@ body {
 
 @import './core/style/media.scss';
 @import 'core/common/stack/stack';
+@import 'core/common/preloader/preloader.scss';
+@import 'core/common/button/button.scss';
+@import 'core/common/numberInput/numberInput.scss';
+@import 'core/common/cryptoTable/cryptoTable.scss';
 @import './core/components/header/header.scss';
 @import './core/components/footer/footer.scss';
 @import './core/components/content/content.scss';
-@import 'pages/currencyInfo/currencyInfo';
-@import 'pages/mainCryptoTable/mainCryptoTable';
+@import 'pages/currencyInfo/currencyInfo.scss';
+@import 'pages/main/main.scss';
 @import './core/components/pagination/pagination.scss';
 @import './core/components/modalBriefcase/modalBriefcase.scss';
 @import './core/components/modalAddCurrency/modalAddCurrency.scss';
-@import 'core/common/preloader/preloader.scss';
-@import 'core/common/button/button.scss';

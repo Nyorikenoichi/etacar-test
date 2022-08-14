@@ -11,6 +11,5 @@
   }
 }
 
-@import "__container/cryptoTable__container";
-@import "__cell/cryptoTable__cell";
-@import "__row/cryptoTable__row";
+@import "./__cell/cryptoTable__cell";
+@import "./__row/cryptoTable__row";
