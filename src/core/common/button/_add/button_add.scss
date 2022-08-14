@@ -1,13 +1,10 @@
-.add-button {
+.button_add {
   margin: 20px 10px;
   padding: 10px 25px;
-  border: none;
-  border-radius: 15px;
   background: $primary-color;
   color: $text-light;
-  font-weight: 500;
-  cursor: pointer;
   transition: all 0.25s ease;
+  font-weight: 500;
 
   &:hover {
     transform: translateY(-5px);

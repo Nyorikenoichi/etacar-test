@@ -10,6 +10,9 @@ import { fetchHistory } from '../../core/redux/slices/currencySlice';
 import ModalAddCurrency from '../../core/components/modalAddCurrency/modalAddCurrency';
 import { useHistoryPrices } from '../../core/lib/hooks/useHistoryPrices';
 import { useTranslation } from 'react-i18next';
+import { Preloader } from '../../core/common/preloader/preloader';
+import { Button } from '../../core/common/button/button';
+import { ButtonVariants } from '../../core/lib/constants/buttonVariants';
 
 export const CurrencyInfo = (): JSX.Element => {
   const dispatch = useAppDispatch();
@@ -40,18 +43,18 @@ export const CurrencyInfo = (): JSX.Element => {
 
   return (
     <>
-      {loading && <div className="preloader" />}
+      {loading && <Preloader />}
       {!loading && error ? <div>Error: {error}</div> : null}
       {!loading && history.length ? (
         <div className="stack stack_vertical currency-info">
-          <button className="close-button" onClick={onBackToMain}>
+          <Button variant={ButtonVariants.close} onClick={onBackToMain}>
             {'<'}
-          </button>
+          </Button>
           <div className="stack">
             <div className="currency-info__heading">{currency?.name}</div>
-            <button className="add-button" onClick={onAddCurrency}>
+            <Button variant={ButtonVariants.add} onClick={onAddCurrency}>
               {t('add_button')}
-            </button>
+            </Button>
           </div>
           <div className="stack currency-info__prices">
             <p>

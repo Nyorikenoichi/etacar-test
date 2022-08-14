@@ -43,11 +43,11 @@ export const options = {
   responsive: true,
 };
 
-interface AreaChartProps {
+export interface AreaChartProps {
   history: HistoryItem[];
 }
 
-export const AreaChart = ({ history }: AreaChartProps): JSX.Element => {
+export const AreaChart: React.FC<AreaChartProps> = ({ history }) => {
   const labels = history.map((item) => {
     const date = new Date(item.time);
     return `${date.getDate()} ${monthNames[date.getMonth()]}`;
