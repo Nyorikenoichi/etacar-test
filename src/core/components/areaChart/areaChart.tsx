@@ -65,5 +65,7 @@ export const AreaChart: React.FC<AreaChartProps> = ({ history }) => {
     ],
   };
 
-  return <Line options={options} data={data} style={{ maxHeight: '450px' }} />;
+  return (
+    <Line className="area-chart" options={options} data={data} style={{ maxHeight: '450px' }} />
+  );
 };

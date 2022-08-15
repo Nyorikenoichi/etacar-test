@@ -112,7 +112,7 @@ export const Main = () => {
           )}%`
         : '';
     const addButton = (
-      <div className="cryptoTable__cell_button" onClick={onAddCurrency(item)}>
+      <div className="crypto-table__cell_button" onClick={onAddCurrency(item)}>
         +
       </div>
     );
@@ -140,6 +140,7 @@ export const Main = () => {
             bodyRowsContent={bodyRowsContent}
             rowIds={currentTableData.map((item) => item.id)}
             onRowClick={onGoToInfo}
+            className="main-table"
           />
           <Pagination
             currentPage={currentPage}

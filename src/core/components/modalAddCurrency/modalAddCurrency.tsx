@@ -65,7 +65,7 @@ const ModalAddCurrency = ({ setIsOpen, currency }: ModalAddCurrencyProps) => {
             </Button>
           </div>
           {showWarning && (
-            <div className={'modal__warning-message'}>Please, input correct numerical value!</div>
+            <div className={'modal__error-message'}>Please, input correct numerical value!</div>
           )}
         </div>
       </div>
