@@ -1,3 +1,4 @@
+import '@percy/cypress';
 import { sizes } from '../support/sizes';
 
 const currencyCount = '2.0502';
@@ -21,19 +22,20 @@ describe('Briefcase Modal', () => {
       cy.get('.modal').should('be.visible');
 
       //compare currency amount
-      cy.wait(200);
       cy.get('.briefcase-table>tbody>.crypto-table__row_body>.crypto-table__cell').eq(2).should('contain', currencyCount);
 
       //reload page and compare currency again
       cy.reload();
       cy.get('.header__briefcase').click();
       cy.get('.modal').should('be.visible');
-      cy.wait(200);
+      cy.wait(500);
       cy.get('.briefcase-table>tbody>.crypto-table__row_body>.crypto-table__cell').eq(2).should('contain', currencyCount);
+
+      //create snapshot for visual testing
+      cy.percySnapshot(`Briefcase modal on ${size}`);
 
       //delete currency
       cy.get('.briefcase-table>tbody>.crypto-table__row_body>.crypto-table__cell').eq(3).click();
-      cy.wait(200);
       cy.get('.modal__error-message').should('be.visible');
 
       //close modal

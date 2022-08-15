@@ -1,3 +1,4 @@
+import '@percy/cypress';
 import { sizes } from '../support/sizes';
 
 const wrongInputs = ['abc', '1x', '1,1', 'one.01', '1.000a', 'x1.002'];
@@ -21,6 +22,9 @@ describe('Add Currency Modal', () => {
         cy.get('.modal__error-message').should('be.visible');
         cy.get('.number-input').clear();
       })
+
+      //create snapshot for visual testing
+      cy.percySnapshot(`Add modal on ${size}`);
       //close modal
       cy.get('.button_close').click();
 

@@ -1,3 +1,4 @@
+import '@percy/cypress';
 import { sizes } from '../support/sizes';
 
 describe('Currency Info Page', () => {
@@ -18,6 +19,9 @@ describe('Currency Info Page', () => {
       cy.get('.currency-info').should('be.visible');
       cy.get('.area-chart').should('be.visible');
       cy.get('.button_add').should('be.visible');
+
+      //create snapshot for visual testing
+      cy.percySnapshot(`Currency info page on ${size}`);
 
       //modal should show when clicking add button
       cy.get('.button_add').click();
