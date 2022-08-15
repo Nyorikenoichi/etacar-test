@@ -7,28 +7,42 @@ import { useNavigate } from 'react-router-dom';
 import { MainRoutes } from '../../core/lib/constants/mainRoutes';
 import { useAppSelector } from '../../core/lib/hooks/useAppSelector';
 import { laptopMediumWidth, tabletWidth } from '../../core/lib/constants/screenSizes';
-import { useWindowWidth } from '../../core/lib/hooks/useWindowWidth';
 import { useTranslation } from 'react-i18next';
-import { paginationSiblingsCount, tablePageSize } from '../../core/lib/constants/tableSettings';
+import {
+  paginationSiblingsCount,
+  defaultTablePageSize,
+} from '../../core/lib/constants/tableSettings';
 import { Preloader } from '../../core/common/preloader/preloader';
 import { CryptoTableHeaderCell } from '../../core/lib/interfaces/cryptoTableHeaderCell';
 import { CryptoTable } from '../../core/common/cryptoTable/cryptoTable';
+import { useWindowSize } from '../../core/lib/hooks/useWindowWidth';
 
 export const Main = () => {
   const { currencies, error, loading } = useAppSelector((state) => state.currency);
-  const windowWidth = useWindowWidth();
+  const [windowWidth, windowHeight] = useWindowSize();
   const navigate = useNavigate();
   const { t } = useTranslation();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedCurrency, setSelectedCurrency] = useState<CurrencyInfo | null>(null);
 
+  let tablePageSize = defaultTablePageSize;
+  if (windowHeight < 900) {
+    tablePageSize -= 2;
+  }
+  if (windowHeight < 800) {
+    tablePageSize -= 2;
+  }
+  if (windowHeight < 700) {
+    tablePageSize -= 2;
+  }
+
   const [currentPage, setCurrentPage] = useState(1);
   const currentTableData = useMemo(() => {
     const firstPageIndex = (currentPage - 1) * tablePageSize;
     const lastPageIndex = firstPageIndex + tablePageSize;
     return currencies.slice(firstPageIndex, lastPageIndex);
-  }, [currentPage, currencies]);
+  }, [currentPage, tablePageSize, currencies]);
 
   const onAddCurrency =
     (currency: CurrencyInfo) => (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
