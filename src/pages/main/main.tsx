@@ -16,8 +16,10 @@ import { Preloader } from '../../core/common/preloader/preloader';
 import { CryptoTableHeaderCell } from '../../core/lib/interfaces/cryptoTableHeaderCell';
 import { CryptoTable } from '../../core/common/cryptoTable/cryptoTable';
 import { useWindowSize } from '../../core/lib/hooks/useWindowWidth';
+import { ButtonVariants } from '../../core/lib/constants/buttonVariants';
+import { Button } from '../../core/common/button/button';
 
-export const Main = () => {
+export const Main: React.FC = () => {
   const { currencies, error, loading } = useAppSelector((state) => state.currency);
   const [windowWidth, windowHeight] = useWindowSize();
   const navigate = useNavigate();
@@ -45,7 +47,7 @@ export const Main = () => {
   }, [currentPage, tablePageSize, currencies]);
 
   const onAddCurrency =
-    (currency: CurrencyInfo) => (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    (currency: CurrencyInfo) => (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
       e.stopPropagation();
       setSelectedCurrency(currency);
       setIsModalOpen(true);
@@ -112,9 +114,9 @@ export const Main = () => {
           )}%`
         : '';
     const addButton = (
-      <div className="crypto-table__cell_button" onClick={onAddCurrency(item)}>
+      <Button variant={ButtonVariants.tableCellAdd} onClick={onAddCurrency(item)}>
         +
-      </div>
+      </Button>
     );
     return [
       item.rank,

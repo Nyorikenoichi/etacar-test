@@ -2,16 +2,20 @@ import React, { useState } from 'react';
 import { formatFloat } from '../../lib/helpers/formatFloat';
 import { ModalBriefcase } from '../modalBriefcase/modalBriefcase';
 import { useAppSelector } from '../../lib/hooks/useAppSelector';
-import { useBriefcaseStats } from '../../lib/hooks/useBriefcaseValues';
+import { getBriefcaseStats } from '../../lib/helpers/getBriefcaseStats';
 import { useTranslation } from 'react-i18next';
 
-export const Header = (): JSX.Element => {
+export const Header: React.FC = () => {
   const { t } = useTranslation();
+  const briefcase = useAppSelector((state) => state.briefcase.currencies);
   const { currencies } = useAppSelector((state) => state.currency);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const topCurrencies = currencies.slice(0, 3);
-  const { initialBriefcasePrice, diff, percentDiff, showPlus } = useBriefcaseStats();
+  const { initialBriefcasePrice, diff, percentDiff, showPlus } = getBriefcaseStats(
+    briefcase,
+    currencies
+  );
 
   const onOpenBriefcase = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.stopPropagation();

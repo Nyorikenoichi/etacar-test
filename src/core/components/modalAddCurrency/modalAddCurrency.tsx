@@ -12,7 +12,7 @@ interface ModalAddCurrencyProps {
   currency: CurrencyInfo | null | undefined;
 }
 
-const ModalAddCurrency = ({ setIsOpen, currency }: ModalAddCurrencyProps) => {
+const ModalAddCurrency: React.FC<ModalAddCurrencyProps> = ({ setIsOpen, currency }) => {
   const dispatch = useAppDispatch();
   const [count, setCount] = useState<string>('');
   const [showWarning, setShowWarning] = useState<boolean>(false);

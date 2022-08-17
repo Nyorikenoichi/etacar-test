@@ -3,7 +3,7 @@ import { formatFloat } from '../../lib/helpers/formatFloat';
 import { useAppSelector } from '../../lib/hooks/useAppSelector';
 import { useAppDispatch } from '../../lib/hooks/useAppDispatch';
 import { removeCurrency } from '../../redux/slices/briefcaseSlice';
-import { useBriefcaseStats } from '../../lib/hooks/useBriefcaseValues';
+import { getBriefcaseStats } from '../../lib/helpers/getBriefcaseStats';
 import { useTranslation } from 'react-i18next';
 import { Button } from '../../common/button/button';
 import { ButtonVariants } from '../../lib/constants/buttonVariants';
@@ -17,7 +17,8 @@ interface ModalBriefcaseProps {
 export const ModalBriefcase: React.FC<ModalBriefcaseProps> = ({ setIsOpen }) => {
   const dispatch = useAppDispatch();
   const briefcase = useAppSelector((state) => state.briefcase.currencies);
-  const { currentBriefcasePrice, initialBriefcasePrice } = useBriefcaseStats();
+  const currencies = useAppSelector((state) => state.currency.currencies);
+  const { currentBriefcasePrice, initialBriefcasePrice } = getBriefcaseStats(briefcase, currencies);
   const { t } = useTranslation();
 
   const onCloseModal = () => {
@@ -53,12 +54,9 @@ export const ModalBriefcase: React.FC<ModalBriefcaseProps> = ({ setIsOpen }) => 
 
   const bodyRowsContent: (string | JSX.Element)[][] = briefcase.map((item) => {
     const deleteButton = (
-      <div
-        className="crypto-table__cell_button crypto-table__cell_button-delete"
-        onClick={onRemoveCurrency(item.id)}
-      >
+      <Button variant={ButtonVariants.tableCellRemove} onClick={onRemoveCurrency(item.id)}>
         X
-      </div>
+      </Button>
     );
     return [item.name, formatFloat(item.initialPrice), item.count.toString(), deleteButton];
   });

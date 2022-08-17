@@ -7,7 +7,7 @@ interface UseHistoryPricesResult {
   averagePrice: number;
 }
 
-export const useHistoryPrices = (history: HistoryItem[]): UseHistoryPricesResult => {
+export const getHistoryStats = (history: HistoryItem[]): UseHistoryPricesResult => {
   const currentPrice = history.length ? parseFloat(history[history.length - 1].priceUsd) : 0;
   const maxPrice = history.length
     ? parseFloat(

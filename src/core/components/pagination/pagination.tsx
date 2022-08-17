@@ -10,13 +10,13 @@ interface CryptoTablePaginationProps {
   pageSize: number;
 }
 
-export const Pagination = ({
+export const Pagination: React.FC<CryptoTablePaginationProps> = ({
   onPageChange,
   totalCount,
   siblingCount,
   currentPage,
   pageSize,
-}: CryptoTablePaginationProps): JSX.Element | null => {
+}) => {
   const paginationRange = usePagination({
     currentPage,
     totalCount,
