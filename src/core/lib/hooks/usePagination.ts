@@ -7,7 +7,7 @@ export const range = (start: number, end: number) => {
   return Array.from({ length }, (_, idx) => idx + start);
 };
 
-interface UsePaginationParams {
+interface UsePaginationProps {
   totalCount: number;
   pageSize: number;
   siblingCount: number;
@@ -19,7 +19,7 @@ export const usePagination = ({
   pageSize,
   siblingCount = 1,
   currentPage,
-}: UsePaginationParams) => {
+}: UsePaginationProps) => {
   return useMemo(() => {
     const totalPageCount = Math.ceil(totalCount / pageSize);
     const pageNumbersWithoutSiblings = 5;

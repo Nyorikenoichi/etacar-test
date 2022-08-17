@@ -17,7 +17,11 @@ interface ModalBriefcaseProps {
 export const ModalBriefcase: React.FC<ModalBriefcaseProps> = ({ setIsOpen }) => {
   const dispatch = useAppDispatch();
   const briefcase = useAppSelector((state) => state.briefcase.currencies);
-  const { currentBriefcasePrice, initialBriefcasePrice } = useBriefcaseStats();
+  const currencies = useAppSelector((state) => state.currency.currencies);
+  const { currentBriefcasePrice, initialBriefcasePrice } = useBriefcaseStats({
+    briefcase,
+    currencies,
+  });
   const { t } = useTranslation();
 
   const onCloseModal = () => {

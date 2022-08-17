@@ -7,11 +7,15 @@ import { useTranslation } from 'react-i18next';
 
 export const Header = (): JSX.Element => {
   const { t } = useTranslation();
+  const briefcase = useAppSelector((state) => state.briefcase.currencies);
   const { currencies } = useAppSelector((state) => state.currency);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const topCurrencies = currencies.slice(0, 3);
-  const { initialBriefcasePrice, diff, percentDiff, showPlus } = useBriefcaseStats();
+  const { initialBriefcasePrice, diff, percentDiff, showPlus } = useBriefcaseStats({
+    briefcase,
+    currencies,
+  });
 
   const onOpenBriefcase = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.stopPropagation();

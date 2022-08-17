@@ -2,9 +2,10 @@ import {
   calculateCurrentBriefcasePrice,
   calculateInitialBriefcasePrice,
 } from '../helpers/briefcaseCalculators';
-import { useAppSelector } from './useAppSelector';
+import { BriefcaseItem } from '../interfaces/briefcaseItem';
+import { CurrencyInfo } from '../interfaces/currencyInfo';
 
-interface UseBriefcasePricesResult {
+interface UseBriefcaseStatsResult {
   currentBriefcasePrice: number;
   initialBriefcasePrice: number;
   diff: number;
@@ -12,12 +13,17 @@ interface UseBriefcasePricesResult {
   showPlus: string;
 }
 
-export const useBriefcaseStats = (): UseBriefcasePricesResult => {
-  const { currencies } = useAppSelector((state) => state.currency);
-  const briefcase = useAppSelector((state) => state.briefcase);
+interface UseBriefcaseProps {
+  briefcase: BriefcaseItem[];
+  currencies: CurrencyInfo[];
+}
 
-  const currentBriefcasePrice = calculateCurrentBriefcasePrice(briefcase.currencies, currencies);
-  const initialBriefcasePrice = calculateInitialBriefcasePrice(briefcase.currencies);
+export const useBriefcaseStats = ({
+  briefcase,
+  currencies,
+}: UseBriefcaseProps): UseBriefcaseStatsResult => {
+  const currentBriefcasePrice = calculateCurrentBriefcasePrice(briefcase, currencies);
+  const initialBriefcasePrice = calculateInitialBriefcasePrice(briefcase);
   const diff = currentBriefcasePrice - initialBriefcasePrice;
   const percentDiff = initialBriefcasePrice ? (diff / initialBriefcasePrice) * 100 : 0;
   const showPlus = diff >= 0 ? '+' : '';
