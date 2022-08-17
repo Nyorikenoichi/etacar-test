@@ -30,3 +30,9 @@ export const currenciesMock: CurrencyInfo[] = [
   { ...emptyCurrency, id: 'dogecoin', priceUsd: '0.2' },
   { ...emptyCurrency, id: 'binance-usd', priceUsd: '1' },
 ];
+
+// summary prices of briefcases to compare in tests
+export const briefcasesMockPrices = [
+  { initial: 1234, current: 1234 },
+  { initial: 33100, current: 49200 },
+];

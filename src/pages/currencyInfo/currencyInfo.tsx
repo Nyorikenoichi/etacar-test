@@ -8,7 +8,7 @@ import { useAppSelector } from '../../core/lib/hooks/useAppSelector';
 import { useAppDispatch } from '../../core/lib/hooks/useAppDispatch';
 import { fetchHistory } from '../../core/redux/slices/currencySlice';
 import ModalAddCurrency from '../../core/components/modalAddCurrency/modalAddCurrency';
-import { useHistoryPrices } from '../../core/lib/hooks/useHistoryPrices';
+import { getHistoryStats } from '../../core/lib/helpers/getHistoryStats';
 import { useTranslation } from 'react-i18next';
 import { Preloader } from '../../core/common/preloader/preloader';
 import { Button } from '../../core/common/button/button';
@@ -31,7 +31,7 @@ export const CurrencyInfo = (): JSX.Element => {
     }
   }, [currencyId, dispatch]);
 
-  const { currentPrice, maxPrice, minPrice, averagePrice } = useHistoryPrices(history);
+  const { currentPrice, maxPrice, minPrice, averagePrice } = getHistoryStats(history);
 
   const onBackToMain = () => {
     navigate(MainRoutes.main);

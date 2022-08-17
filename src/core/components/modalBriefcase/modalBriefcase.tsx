@@ -3,7 +3,7 @@ import { formatFloat } from '../../lib/helpers/formatFloat';
 import { useAppSelector } from '../../lib/hooks/useAppSelector';
 import { useAppDispatch } from '../../lib/hooks/useAppDispatch';
 import { removeCurrency } from '../../redux/slices/briefcaseSlice';
-import { useBriefcaseStats } from '../../lib/hooks/useBriefcaseValues';
+import { getBriefcaseStats } from '../../lib/helpers/getBriefcaseStats';
 import { useTranslation } from 'react-i18next';
 import { Button } from '../../common/button/button';
 import { ButtonVariants } from '../../lib/constants/buttonVariants';
@@ -18,10 +18,7 @@ export const ModalBriefcase: React.FC<ModalBriefcaseProps> = ({ setIsOpen }) => 
   const dispatch = useAppDispatch();
   const briefcase = useAppSelector((state) => state.briefcase.currencies);
   const currencies = useAppSelector((state) => state.currency.currencies);
-  const { currentBriefcasePrice, initialBriefcasePrice } = useBriefcaseStats({
-    briefcase,
-    currencies,
-  });
+  const { currentBriefcasePrice, initialBriefcasePrice } = getBriefcaseStats(briefcase, currencies);
   const { t } = useTranslation();
 
   const onCloseModal = () => {
