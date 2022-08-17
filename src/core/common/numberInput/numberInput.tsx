@@ -9,9 +9,12 @@ export interface NumberInputProps {
 
 const validationRegexp = /^([0-9]+)(\.)?([0-9]+)?$/;
 
-export const NumberInput: React.FC<NumberInputProps> = (props) => {
-  const { value, setValue, placeholder, autoFocus } = props;
-
+export const NumberInput: React.FC<NumberInputProps> = ({
+  value,
+  setValue,
+  placeholder,
+  autoFocus,
+}) => {
   const onInputValue = (e: ChangeEvent<HTMLInputElement>) => {
     const input = e.target.value;
     setValue(input);

@@ -5,7 +5,7 @@ import { useAppSelector } from '../../lib/hooks/useAppSelector';
 import { getBriefcaseStats } from '../../lib/helpers/getBriefcaseStats';
 import { useTranslation } from 'react-i18next';
 
-export const Header = (): JSX.Element => {
+export const Header: React.FC = () => {
   const { t } = useTranslation();
   const briefcase = useAppSelector((state) => state.briefcase.currencies);
   const { currencies } = useAppSelector((state) => state.currency);

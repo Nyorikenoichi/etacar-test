@@ -54,12 +54,9 @@ export const ModalBriefcase: React.FC<ModalBriefcaseProps> = ({ setIsOpen }) => 
 
   const bodyRowsContent: (string | JSX.Element)[][] = briefcase.map((item) => {
     const deleteButton = (
-      <div
-        className="crypto-table__cell_button crypto-table__cell_button-delete"
-        onClick={onRemoveCurrency(item.id)}
-      >
+      <Button variant={ButtonVariants.tableCellRemove} onClick={onRemoveCurrency(item.id)}>
         X
-      </div>
+      </Button>
     );
     return [item.name, formatFloat(item.initialPrice), item.count.toString(), deleteButton];
   });

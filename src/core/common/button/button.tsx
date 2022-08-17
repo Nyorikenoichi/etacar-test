@@ -3,7 +3,7 @@ import { ButtonVariants } from '../../lib/constants/buttonVariants';
 
 export interface ButtonProps {
   variant: ButtonVariants;
-  onClick: () => void;
+  onClick: ((e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void) | (() => void);
   children?: React.ReactNode;
 }
 

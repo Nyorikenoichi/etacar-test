@@ -14,7 +14,7 @@ import { Preloader } from '../../core/common/preloader/preloader';
 import { Button } from '../../core/common/button/button';
 import { ButtonVariants } from '../../core/lib/constants/buttonVariants';
 
-export const CurrencyInfo = (): JSX.Element => {
+export const CurrencyInfo: React.FC = () => {
   const dispatch = useAppDispatch();
   const { currencies, history, error, loading } = useAppSelector((state) => state.currency);
   const { t } = useTranslation();
