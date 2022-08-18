@@ -1,7 +1,7 @@
 .currency-info {
   position: fixed;
   justify-content: flex-start;
-  width: 50%;
+  width: 60%;
   height: 550px;
   padding: 40px;
   background-color: $background-light;
@@ -11,7 +11,7 @@
   font-size: 22px;
 
   @include media-laptop {
-    width: 65%;
+    width: 70%;
   }
 
   @include media-tablet {
