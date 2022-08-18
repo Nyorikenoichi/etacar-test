@@ -8,7 +8,7 @@ export default {
 } as Meta;
 
 const Template: Story<AreaChartProps> = (args: AreaChartProps) => (
-  <div className="modal__container">
+  <div className="area-chart">
     <AreaChart {...args} />
   </div>
 );
@@ -26,6 +26,6 @@ Default.args = {
     { priceUsd: '48908.6248551045851620', time: 1629590400000 },
     { priceUsd: '49900.4695635912542356', time: 1629676800000 },
   ],
-  width: 800,
+  width: 1200,
   height: 400,
 };

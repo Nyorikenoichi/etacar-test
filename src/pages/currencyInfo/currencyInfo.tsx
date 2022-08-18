@@ -3,7 +3,7 @@ import { useQuery } from '../../core/lib/hooks/useQuery';
 import { formatFloat } from '../../core/lib/helpers/formatFloat';
 import { MainRoutes } from '../../core/lib/constants/mainRoutes';
 import { useNavigate } from 'react-router-dom';
-import { AreaChart } from '../../core/components/areaChart/areaChart';
+import { AreaChart } from '../../core/common/areaChart/areaChart';
 import { useAppSelector } from '../../core/lib/hooks/useAppSelector';
 import { useAppDispatch } from '../../core/lib/hooks/useAppDispatch';
 import { fetchHistory } from '../../core/redux/slices/currencySlice';

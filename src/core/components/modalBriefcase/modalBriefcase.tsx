@@ -9,6 +9,7 @@ import { Button } from '../../common/button/button';
 import { ButtonVariants } from '../../lib/constants/buttonVariants';
 import { CryptoTableHeaderCell } from '../../lib/interfaces/cryptoTableHeaderCell';
 import { CryptoTable } from '../../common/cryptoTable/cryptoTable';
+import { PieChart } from '../../common/pieChart/pieChart';
 
 interface ModalBriefcaseProps {
   setIsOpen: (option: boolean) => void;
@@ -78,13 +79,20 @@ export const ModalBriefcase: React.FC<ModalBriefcaseProps> = ({ setIsOpen }) => 
               <p>
                 {t('modal_current_price')} ${currentBriefcasePrice.toFixed(2)}
               </p>
-              <div className="crypto-table__container modal__currencies">
-                <CryptoTable
-                  headerCells={headerCells}
-                  bodyRowsContent={bodyRowsContent}
-                  rowIds={briefcase.map((item) => item.id)}
-                  className="briefcase-table"
-                />
+              <div className="modal__data-space">
+                <div className="crypto-table__container modal__currencies">
+                  <CryptoTable
+                    headerCells={headerCells}
+                    bodyRowsContent={bodyRowsContent}
+                    rowIds={briefcase.map((item) => item.id)}
+                    className="modal__briefcase-table"
+                  />
+                </div>
+                {briefcase.length > 0 ? (
+                  <PieChart briefcase={briefcase} width={200} height={200} />
+                ) : (
+                  ''
+                )}
               </div>
             </>
           ) : (

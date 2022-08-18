@@ -17,8 +17,14 @@ const history: HistoryItem[] = [
 ];
 
 it('NumberInput component', () => {
-  render(<AreaChart history={history} width={800} height={400}/>);
-  const areaChart = screen.getByRole('img');
+  render(
+    <AreaChart history={history} width={800} height={400}>
+      areaChart
+    </AreaChart>
+  );
+  const areaChart = screen.getByText('areaChart');
   expect(areaChart).toBeInTheDocument();
   expect(areaChart).toHaveClass('area-chart');
 });
+
+

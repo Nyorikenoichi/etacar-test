@@ -6,6 +6,8 @@
     "@reduxjs/toolkit": "^1.8.4",
     "@storybook/react": "^6.5.10",
     "@storybook/testing-library": "^0.0.13",
+    "@testing-library/react": "^13.3.0",
+    "@testing-library/react-hooks": "^8.0.1",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/user-event": "^14.4.3",
     "@types/jest": "^28.1.6",
@@ -59,8 +61,6 @@
     "@storybook/node-logger": "^6.5.10",
     "@storybook/preset-create-react-app": "^4.1.2",
     "@storybook/preset-scss": "^1.0.3",
-    "@testing-library/react": "^13.3.0",
-    "@testing-library/react-hooks": "^8.0.1",
     "@types/d3": "^7.4.0",
     "@typescript-eslint/eslint-plugin": "^5.33.0",
     "@typescript-eslint/parser": "^5.33.0",
@@ -98,5 +98,10 @@
         }
       }
     ]
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "^d3$": "<rootDir>/node_modules/d3/dist/d3.min.js"
+    }
   }
 }
