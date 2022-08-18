@@ -13,6 +13,13 @@ import { useTranslation } from 'react-i18next';
 import { Preloader } from '../../core/common/preloader/preloader';
 import { Button } from '../../core/common/button/button';
 import { ButtonVariants } from '../../core/lib/constants/buttonVariants';
+import { useWindowSize } from '../../core/lib/hooks/useWindowWidth';
+import {
+  laptopLargeWidth,
+  laptopWidth,
+  mobileBigWidth,
+  tabletWidth,
+} from '../../core/lib/constants/screenSizes';
 
 export const CurrencyInfo: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -24,6 +31,22 @@ export const CurrencyInfo: React.FC = () => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const currency = currencies.find((item) => item.id === currencyId);
+
+  const [windowWidth] = useWindowSize();
+
+  let areaChartSizes = [800, 400];
+  if (windowWidth < laptopLargeWidth) {
+    areaChartSizes = [650, 360];
+  }
+  if (windowWidth < laptopWidth) {
+    areaChartSizes = [550, 320];
+  }
+  if (windowWidth < tabletWidth) {
+    areaChartSizes = [400, 300];
+  }
+  if (windowWidth < mobileBigWidth) {
+    areaChartSizes = [300, 300];
+  }
 
   useEffect(() => {
     if (currencyId != null) {
@@ -70,7 +93,7 @@ export const CurrencyInfo: React.FC = () => {
               {t('currency_info_avg')} ${formatFloat(averagePrice)}
             </p>
           </div>
-          <AreaChart history={history} />
+          <AreaChart history={history} width={areaChartSizes[0]} height={areaChartSizes[1]} />
         </div>
       ) : null}
       {isModalOpen && <ModalAddCurrency setIsOpen={setIsModalOpen} currency={currency} />}
