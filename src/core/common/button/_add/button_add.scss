@@ -1,0 +1,13 @@
+.button_add {
+  margin: 20px 10px;
+  padding: 10px 25px;
+  background: $primary-color;
+  color: $text-light;
+  transition: all 0.25s ease;
+  font-weight: 500;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.2);
+  }
+}

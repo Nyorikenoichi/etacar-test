@@ -1,13 +1,15 @@
 {
     "env": {
         "browser": true,
-        "es2021": true
+        "es2021": true,
+        "cypress/globals": true
     },
     "extends": [
         "plugin:react/recommended",
         "plugin:@typescript-eslint/recommended",
         "plugin:prettier/recommended",
         "plugin:import/recommended",
+        "plugin:cypress/recommended",
         "airbnb-typescript",
         "prettier"
     ],
@@ -23,7 +25,8 @@
     "plugins": [
         "react",
         "@typescript-eslint",
-        "react-hooks"
+        "react-hooks",
+        "cypress"
     ],
     "rules": {
         "max-len": ["warn", { "code": 120 }],
@@ -37,7 +40,14 @@
         "import/prefer-default-export": "off",
         "import/no-named-as-default": "off",
         "react/prop-types": "off",
-        "react/display-name": "off"
+        "react/display-name": "off",
+        "react/no-children-prop": "off",
+        "cypress/no-assigning-return-values": "error",
+        "cypress/no-unnecessary-waiting": "error",
+        "cypress/assertion-before-screenshot": "warn",
+        "cypress/no-force": "warn",
+        "cypress/no-async-tests": "error",
+        "cypress/no-pause": "error"
     },
     "settings": {
         "react": {

@@ -1,0 +1,12 @@
+.button_table-cell-add {
+  background: $secondary-color;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 300ms;
+  font-size: 18px;
+
+  &:hover {
+    transform: scale(1.1);
+    background: $primary-color;
+  }
+}

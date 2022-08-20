@@ -1,0 +1,16 @@
+.button_close {
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin: -7px -7px 0 0;
+  padding: 4px 8px;
+  background: $cancel-color;
+  color: $text-light;
+  transition: all 0.25s ease;
+  box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.06);
+
+  &:hover {
+    box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.04);
+    transform: translate(-4px, 4px);
+  }
+}

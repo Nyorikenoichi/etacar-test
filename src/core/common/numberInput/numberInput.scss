@@ -1,0 +1,16 @@
+.number-input {
+  width: 200px;
+  height: 30px;
+  padding: 0 20px;
+  border: 2px solid $primary-color;
+  border-radius: 15px;
+  font-family: Roboto, sans-serif;
+  font-weight: 500;
+  transition: 300ms ease;
+
+  &:focus {
+    outline: none !important;
+    background: $secondary-color-light;
+    border: 2px solid $primary-color;
+  }
+}

@@ -1,7 +1,9 @@
-import axios from 'axios';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { CurrencyInfo } from '../../lib/interfaces/currencyInfo';
 import { HistoryItem } from '../../lib/interfaces/historyItem';
+import { client } from '../../graphql/client';
+import { GET_ALL_CURRENCIES } from '../../graphql/queries/getAllCurrencies';
+import { GET_HISTORY_BY_ID } from '../../graphql/queries/getHistoryById';
 
 interface InitialState {
   loading: boolean;
@@ -17,20 +19,18 @@ const initialState: InitialState = {
   error: '',
 };
 
-const apiUrl = 'https://api.coincap.io/v2/assets';
-
 export const fetchCurrencies = createAsyncThunk('currency/fetchCurrencies', async () => {
-  const response = await axios.get(apiUrl);
-  const apiData = await response.data;
-  return apiData.data;
+  const response = await client.query({ query: GET_ALL_CURRENCIES });
+  const data = response.data;
+  return data.getAllCurrencies;
 });
 
 export const fetchHistory = createAsyncThunk(
   'currency/fetchCurrencyHistory',
   async (id: string) => {
-    const response = await axios.get(`${apiUrl}/${id}/history?interval=d1`);
-    const apiData = await response.data;
-    return apiData.data;
+    const response = await client.query({ query: GET_HISTORY_BY_ID(id) });
+    const data = response.data;
+    return data.getHistoryById;
   }
 );
 

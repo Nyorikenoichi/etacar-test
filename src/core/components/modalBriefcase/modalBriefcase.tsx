@@ -3,17 +3,23 @@ import { formatFloat } from '../../lib/helpers/formatFloat';
 import { useAppSelector } from '../../lib/hooks/useAppSelector';
 import { useAppDispatch } from '../../lib/hooks/useAppDispatch';
 import { removeCurrency } from '../../redux/slices/briefcaseSlice';
-import { useBriefcaseStats } from '../../lib/hooks/useBriefcaseValues';
+import { getBriefcaseStats } from '../../lib/helpers/getBriefcaseStats';
 import { useTranslation } from 'react-i18next';
+import { Button } from '../../common/button/button';
+import { ButtonVariants } from '../../lib/constants/buttonVariants';
+import { CryptoTableHeaderCell } from '../../lib/interfaces/cryptoTableHeaderCell';
+import { CryptoTable } from '../../common/cryptoTable/cryptoTable';
+import { PieChart } from '../../common/pieChart/pieChart';
 
 interface ModalBriefcaseProps {
   setIsOpen: (option: boolean) => void;
 }
 
-export const ModalBriefcase = ({ setIsOpen }: ModalBriefcaseProps) => {
+export const ModalBriefcase: React.FC<ModalBriefcaseProps> = ({ setIsOpen }) => {
   const dispatch = useAppDispatch();
   const briefcase = useAppSelector((state) => state.briefcase.currencies);
-  const { currentBriefcasePrice, initialBriefcasePrice } = useBriefcaseStats();
+  const currencies = useAppSelector((state) => state.currency.currencies);
+  const { currentBriefcasePrice, initialBriefcasePrice } = getBriefcaseStats(briefcase, currencies);
   const { t } = useTranslation();
 
   const onCloseModal = () => {
@@ -24,14 +30,46 @@ export const ModalBriefcase = ({ setIsOpen }: ModalBriefcaseProps) => {
     dispatch(removeCurrency(currencyId));
   };
 
+  const headerCells: CryptoTableHeaderCell[] = [
+    {
+      columnClassNames: 'crypto-table__cell',
+      content: t('crypto_table_name'),
+      isHidden: false,
+    },
+    {
+      columnClassNames: 'crypto-table__cell crypto-table__cell_align-left',
+      content: t('crypto_table_price'),
+      isHidden: false,
+    },
+    {
+      columnClassNames: 'crypto-table__cell',
+      content: t('crypto_table_count'),
+      isHidden: false,
+    },
+    {
+      columnClassNames: 'crypto-table__cell',
+      content: '',
+      isHidden: false,
+    },
+  ];
+
+  const bodyRowsContent: (string | JSX.Element)[][] = briefcase.map((item) => {
+    const deleteButton = (
+      <Button variant={ButtonVariants.tableCellRemove} onClick={onRemoveCurrency(item.id)}>
+        X
+      </Button>
+    );
+    return [item.name, formatFloat(item.initialPrice), item.count.toString(), deleteButton];
+  });
+
   return (
     <>
       <div className="modal__background" onClick={onCloseModal} />
       <div className="modal">
         <div className="stack stack_vertical modal__container">
-          <button className="close-button" onClick={onCloseModal}>
+          <Button variant={ButtonVariants.close} onClick={onCloseModal}>
             X
-          </button>
+          </Button>
           <div className="modal__heading">{t('modal_briefcase_heading')}</div>
           {briefcase.length > 0 ? (
             <>
@@ -41,40 +79,24 @@ export const ModalBriefcase = ({ setIsOpen }: ModalBriefcaseProps) => {
               <p>
                 {t('modal_current_price')} ${currentBriefcasePrice.toFixed(2)}
               </p>
-              <div className="crypto-table__container modal__currencies">
-                <table className="crypto-table">
-                  <thead>
-                    <tr className="crypto-table__row crypto-table__row_header">
-                      <th className="crypto-table__cell">{t('crypto_table_name')}</th>
-                      <th className="crypto-table__cell">{t('crypto_table_price')}</th>
-                      <th className="crypto-table__cell">{t('crypto_table_count')}</th>
-                      <th />
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {briefcase.map((item) => (
-                      <tr className="crypto-table__row crypto-table__row_body" key={item.id}>
-                        <td className="crypto-table__cell">{item.name}</td>
-                        <td className="crypto-table__cell crypto-table__cell_align-left">
-                          ${formatFloat(item.initialPrice)}
-                        </td>
-                        <td className="crypto-table__cell">{item.count}</td>
-                        <td className="crypto-table__cell">
-                          <div
-                            className="cryptoTable__cell_button cryptoTable__cell_button-delete"
-                            onClick={onRemoveCurrency(item.id)}
-                          >
-                            X
-                          </div>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+              <div className="modal__data-space">
+                <div className="crypto-table__container modal__currencies">
+                  <CryptoTable
+                    headerCells={headerCells}
+                    bodyRowsContent={bodyRowsContent}
+                    rowIds={briefcase.map((item) => item.id)}
+                    className="modal__briefcase-table"
+                  />
+                </div>
+                {briefcase.length > 0 ? (
+                  <PieChart briefcase={briefcase} width={200} height={200} />
+                ) : (
+                  ''
+                )}
               </div>
             </>
           ) : (
-            <p>{t('modal_no_currencies')}</p>
+            <p className="modal__error-message">{t('modal_no_currencies')}</p>
           )}
         </div>
       </div>
