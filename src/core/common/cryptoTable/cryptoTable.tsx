@@ -7,7 +7,7 @@ export interface CryptoTableProps {
   bodyRowsContent: (string | JSX.Element)[][];
   rowIds: string[];
   onRowClick?: (id: string) => (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
-  className: string;
+  className?: string;
 }
 
 export const CryptoTable: React.FC<CryptoTableProps> = ({
@@ -18,7 +18,7 @@ export const CryptoTable: React.FC<CryptoTableProps> = ({
   className,
 }) => {
   return (
-    <table className={`crypto-table ${className}`}>
+    <table className={`crypto-table ${className !== undefined ? className : ''}`}>
       <thead>
         <tr className="crypto-table__row crypto-table__row_header">
           {headerCells.map((item) => {

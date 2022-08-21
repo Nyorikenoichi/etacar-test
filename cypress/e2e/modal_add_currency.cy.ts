@@ -11,7 +11,7 @@ describe('Add Currency Modal', () => {
       cy.visit('/')
 
       //click on add currency button in table
-      cy.get('.crypto-table__cell_button').first().click();
+      cy.get('.button_table-cell-add').first().click();
       //add modal should open
       cy.get('.modal_add-currency').should('be.visible');
 
@@ -30,7 +30,7 @@ describe('Add Currency Modal', () => {
 
       //input some correct values
       correctInputs.forEach((input) => {
-        cy.get('.crypto-table__cell_button').first().click();
+        cy.get('.button_table-cell-add').first().click();
         cy.get('.number-input').focus().type(input).blur();
         cy.get('.button_add').click();
       })

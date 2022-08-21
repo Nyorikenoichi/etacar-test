@@ -5,22 +5,18 @@ import { briefcasesMock } from '../../lib/mockup/briefcaseMock';
 
 const briefcase = briefcasesMock[1];
 briefcase[1].count = 50;
-briefcase[2].count = 200000;
+briefcase[2].count = 250000;
 
 export default {
   title: 'Pie chart',
   component: PieChart,
 } as Meta;
 
-const Template: Story<PieChartProps> = (args: PieChartProps) => (
-  <div className="pie-chart">
-    <PieChart {...args} />
-  </div>
-);
+const Template: Story<PieChartProps> = (args: PieChartProps) => <PieChart {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
   briefcase: briefcase,
-  width: 1200,
-  height: 400,
+  width: 250,
+  height: 250,
 };
