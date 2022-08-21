@@ -77,6 +77,7 @@ export const PieChart: React.FC<PieChartProps> = (props) => {
         return `translate(${arcGenerator.centroid(d)})`;
       })
       .style('text-anchor', 'middle')
+      .style('font-family', 'roboto')
       .style('font-size', '14px')
       .style('font-weight', '600')
       .style('fill', '#fff');

@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import * as d3 from 'd3';
 import { HistoryItem } from '../../lib/interfaces/historyItem';
+import { formatFloat } from '../../lib/helpers/formatFloat';
 
 export interface AreaChartProps {
   history: HistoryItem[];
@@ -43,7 +44,12 @@ export const AreaChart: React.FC<AreaChartProps> = (props) => {
         }) as [Date, Date]
       )
       .range([0, width]);
-    svg.append('g').attr('transform', `translate(0, ${height})`).call(d3.axisBottom(x));
+
+    svg
+      .append('g')
+      .attr('transform', `translate(0, ${height})`)
+      .style('font-family', 'roboto')
+      .call(d3.axisBottom(x));
 
     const y = d3
       .scaleLinear()
@@ -65,7 +71,7 @@ export const AreaChart: React.FC<AreaChartProps> = (props) => {
       ] as number[])
       .range([height, 0]);
 
-    svg.append('g').call(d3.axisLeft(y));
+    svg.append('g').style('font-family', 'roboto').call(d3.axisLeft(y));
 
     svg
       .append('path')
@@ -87,10 +93,10 @@ export const AreaChart: React.FC<AreaChartProps> = (props) => {
           })
       );
 
-    const tooltip = d3.select('.tooltip');
+    const tooltip = d3.select('.area-chart__tooltip');
     const tooltipCircle = svg
       .append('circle')
-      .attr('class', 'tooltip-circle')
+      .attr('class', 'area-chart__tooltip-circle')
       .attr('r', 6)
       .attr('stroke', '#af9358')
       .attr('fill', 'none')
@@ -99,7 +105,7 @@ export const AreaChart: React.FC<AreaChartProps> = (props) => {
     const xAxisLine = svg
       .append('g')
       .append('rect')
-      .attr('class', 'dotted')
+      .attr('class', 'area-chart__vertical-line')
       .attr('stroke-width', '1px')
       .attr('width', '.5px')
       .attr('height', height);
@@ -122,21 +128,16 @@ export const AreaChart: React.FC<AreaChartProps> = (props) => {
       const formatDate = d3.timeFormat('%B %-d, %Y');
       tooltip.select('.date').text(formatDate(closestXValue));
 
-      const formatInternetUsage = (d: number) => `${d3.format('.1f')(d)}$`;
-      tooltip.select('.internet').html(formatInternetUsage(closestYValue));
+      tooltip.select('.price').html(`$${formatFloat(closestYValue)}`);
 
       const dx = x(closestXValue) + margin.left;
       const dy = y(closestYValue) + margin.top;
 
-      //Grab the x and y position of our closest point,
-      //shift our tooltip, and hide/show our tooltip appropriately
-
-      tooltip.style('transform', `translate(calc(${dx}px), calc(100% + ${dy}px))`);
-
-      tooltip.style('opacity', 1);
+      tooltip
+        .style('transform', `translate(calc(${dx}px), calc(100% + ${dy}px))`)
+        .style('opacity', 1);
 
       tooltipCircle.attr('cx', x(closestXValue)).attr('cy', y(closestYValue)).style('opacity', 1);
-
       xAxisLine.attr('x', x(closestXValue));
     };
 
@@ -148,7 +149,7 @@ export const AreaChart: React.FC<AreaChartProps> = (props) => {
 
     svg
       .append('rect')
-      .attr('class', 'listening-rect')
+      .attr('class', 'area-chart__listening-rect')
       .attr('width', width)
       .attr('height', height)
       .on('mousemove', (event) => onMouseMove(event))
@@ -158,12 +159,12 @@ export const AreaChart: React.FC<AreaChartProps> = (props) => {
   return (
     <div className="area-chart">
       {props.children}
-      <div className="tooltip">
-        <div className="tooltip-date">
+      <div className="area-chart__tooltip">
+        <div className="area-chart__tooltip-date">
           <span className="date"></span>
         </div>
-        <div className="tooltip-Internet">
-          <span className="internet"></span>
+        <div className="area-chart__tooltip-price">
+          <span className="price"></span>
         </div>
       </div>
     </div>

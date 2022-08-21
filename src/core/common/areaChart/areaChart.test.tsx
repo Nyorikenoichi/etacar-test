@@ -26,5 +26,3 @@ it('NumberInput component', () => {
   expect(areaChart).toBeInTheDocument();
   expect(areaChart).toHaveClass('area-chart');
 });
-
-

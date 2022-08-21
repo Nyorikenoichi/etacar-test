@@ -5,7 +5,7 @@ import { briefcasesMock } from '../../lib/mockup/briefcaseMock';
 
 const briefcase = briefcasesMock[1];
 briefcase[1].count = 50;
-briefcase[2].count = 200000;
+briefcase[2].count = 250000;
 
 export default {
   title: 'Pie chart',
