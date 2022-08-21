@@ -19,11 +19,10 @@ export const PieChart: React.FC<PieChartProps> = (props) => {
     return { name: item.name, value: item.count * item.initialPrice };
   });
 
-  const margin = 30;
   const width = props.width;
   const height = props.height;
 
-  const radius = Math.min(width, height) / 2 - margin;
+  const radius = Math.min(width, height) / 2 - 5;
 
   useEffect(() => {
     if (!d3.select('.pie-chart').selectAll('svg').empty()) {
@@ -78,7 +77,9 @@ export const PieChart: React.FC<PieChartProps> = (props) => {
         return `translate(${arcGenerator.centroid(d)})`;
       })
       .style('text-anchor', 'middle')
-      .style('font-size', '14px');
+      .style('font-size', '14px')
+      .style('font-weight', '600')
+      .style('fill', '#fff');
   });
   return <div className="pie-chart">{props.children}</div>;
 };

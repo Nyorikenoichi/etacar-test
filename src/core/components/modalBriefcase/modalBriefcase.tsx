@@ -89,7 +89,7 @@ export const ModalBriefcase: React.FC<ModalBriefcaseProps> = ({ setIsOpen }) => 
                   />
                 </div>
                 {briefcase.length > 0 ? (
-                  <PieChart briefcase={briefcase} width={200} height={200} />
+                  <PieChart briefcase={briefcase} width={225} height={225} />
                 ) : (
                   ''
                 )}
