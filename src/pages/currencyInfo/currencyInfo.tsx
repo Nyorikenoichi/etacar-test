@@ -42,7 +42,7 @@ export const CurrencyInfo: React.FC = () => {
     areaChartSizes = [550, 320];
   }
   if (windowWidth < tabletWidth) {
-    areaChartSizes = [400, 300];
+    areaChartSizes = [380, 300];
   }
   if (windowWidth < mobileBigWidth) {
     areaChartSizes = [300, 300];

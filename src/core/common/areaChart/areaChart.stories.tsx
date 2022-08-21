@@ -7,11 +7,7 @@ export default {
   component: AreaChart,
 } as Meta;
 
-const Template: Story<AreaChartProps> = (args: AreaChartProps) => (
-  <div className="area-chart">
-    <AreaChart {...args} />
-  </div>
-);
+const Template: Story<AreaChartProps> = (args: AreaChartProps) => <AreaChart {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
