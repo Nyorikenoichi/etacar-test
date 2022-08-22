@@ -44,7 +44,7 @@ const ModalAddCurrency: React.FC<ModalAddCurrencyProps> = ({ setIsOpen, currency
   return (
     <>
       <div className="modal__background" onClick={onCloseModal} />
-      <div className="modal modal_add-currency">
+      <div className="modal modal_add-currency" data-cy="modal-add-currency">
         <div className="stack stack_vertical modal__container">
           <Button variant={ButtonVariants.close} onClick={onCloseModal}>
             X
@@ -65,7 +65,9 @@ const ModalAddCurrency: React.FC<ModalAddCurrencyProps> = ({ setIsOpen, currency
             </Button>
           </div>
           {showWarning && (
-            <div className={'modal__error-message'}>Please, input correct numerical value!</div>
+            <div className={'modal__error-message'} data-cy="modal-error-message">
+              {t('modal_wrong_input')}
+            </div>
           )}
         </div>
       </div>

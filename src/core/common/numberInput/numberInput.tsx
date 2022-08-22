@@ -30,6 +30,7 @@ export const NumberInput: React.FC<NumberInputProps> = ({
     <input
       placeholder={placeholder}
       className="number-input"
+      data-cy="number-input"
       autoFocus={autoFocus}
       onChange={onInputValue}
       onBlur={onBlur}

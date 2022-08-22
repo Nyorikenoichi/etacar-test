@@ -22,6 +22,7 @@
       "modal_initial_price": "Initial price was",
       "modal_current_price": "Current price is",
       "modal_no_currencies": "No currencies yet :(",
+      "modal_wrong_input": "Please, input correct numerical value!",
       "add_button": "Add to briefcase",
       "author": "Maksim Maltcev",
       "company_name": "EtaCar Systems"
