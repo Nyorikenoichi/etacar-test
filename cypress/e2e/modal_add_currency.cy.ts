@@ -11,28 +11,28 @@ describe('Add Currency Modal', () => {
       cy.visit('/')
 
       //click on add currency button in table
-      cy.get('.button_table-cell-add').first().click();
+      cy.get('[data-cy="button-table-add"]').first().click();
       //add modal should open
-      cy.get('.modal_add-currency').should('be.visible');
+      cy.get('[data-cy="modal-add-currency"]').should('be.visible');
 
       //when submitting wrong input, error message shows
       wrongInputs.forEach((input) => {
-        cy.get('.number-input').focus().type(input).blur();
-        cy.get('.button_add').click();
-        cy.get('.modal__error-message').should('be.visible');
-        cy.get('.number-input').clear();
+        cy.get('[data-cy="number-input"]').focus().type(input).blur();
+        cy.get('[data-cy="button-add"]').click();
+        cy.get('[data-cy="modal-error-message"]').should('be.visible');
+        cy.get('[data-cy="number-input"]').clear();
       })
 
       //create snapshot for visual testing
       cy.percySnapshot(`Add modal on ${size}`);
       //close modal
-      cy.get('.button_close').click();
+      cy.get('[data-cy="button-close"]').click();
 
       //input some correct values
       correctInputs.forEach((input) => {
-        cy.get('.button_table-cell-add').first().click();
-        cy.get('.number-input').focus().type(input).blur();
-        cy.get('.button_add').click();
+        cy.get('[data-cy="button-table-add"]').first().click();
+        cy.get('[data-cy="number-input"]').focus().type(input).blur();
+        cy.get('[data-cy="button-add"]').click();
       })
     });
   })

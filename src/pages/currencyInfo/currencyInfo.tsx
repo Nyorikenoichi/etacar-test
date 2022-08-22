@@ -69,7 +69,7 @@ export const CurrencyInfo: React.FC = () => {
       {loading && <Preloader />}
       {!loading && error ? <div>Error: {error}</div> : null}
       {!loading && history.length ? (
-        <div className="stack stack_vertical currency-info">
+        <div className="stack stack_vertical currency-info" data-cy="currency-info">
           <Button variant={ButtonVariants.close} onClick={onBackToMain}>
             {'<'}
           </Button>

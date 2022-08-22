@@ -157,7 +157,7 @@ export const AreaChart: React.FC<AreaChartProps> = (props) => {
   });
 
   return (
-    <div className="area-chart">
+    <div className="area-chart" data-cy="area-chart">
       {props.children}
       <div className="area-chart__tooltip">
         <div className="area-chart__tooltip-date">
