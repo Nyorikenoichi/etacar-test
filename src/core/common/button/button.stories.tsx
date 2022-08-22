@@ -25,3 +25,15 @@ Close.args = {
   variant: ButtonVariants.close,
   children: 'X',
 };
+
+export const TableAdd = Template.bind({});
+TableAdd.args = {
+  variant: ButtonVariants.tableCellAdd,
+  children: '+',
+};
+
+export const TableRemove = Template.bind({});
+TableRemove.args = {
+  variant: ButtonVariants.tableCellRemove,
+  children: 'X',
+};
