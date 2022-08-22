@@ -10,36 +10,34 @@ describe('Briefcase Modal', () => {
       cy.visit('/')
 
       //briefcase menu exists
-      cy.get('.header__briefcase').should('be.visible');
+      cy.get('[data-cy="header-briefcase"]').should('be.visible');
 
       //add some currency
-      cy.get('.button_table-cell-add').first().click();
-      cy.get('.number-input').focus().type(currencyCount).blur();
-      cy.get('.button_add').click();
+      cy.get('[data-cy="button-table-add"]').first().click();
+      cy.get('[data-cy="number-input"]').focus().type(currencyCount).blur();
+      cy.get('[data-cy="button-add"]').click();
 
       //open briefcase modal
-      cy.get('.header__briefcase').click();
-      cy.get('.modal').should('be.visible');
+      const modalBriefcase = () => cy.get('[data-cy="modal-briefcase"]');
+      cy.get('[data-cy="header-briefcase"]').click();
+      modalBriefcase().should('be.visible');
 
       //compare currency amount
-      cy.get('.modal__briefcase-table>tbody>.crypto-table__row_body>.crypto-table__cell').eq(2).should('contain', currencyCount);
+      modalBriefcase().find('[data-cy="crypto-table-body-cell"]').eq(2).should('contain', currencyCount);
 
       //reload page and compare currency again
       cy.reload();
-      cy.get('.header__briefcase').click();
-      cy.get('.modal').should('be.visible');
+      cy.get('[data-cy="header-briefcase"]').click();
+      modalBriefcase().should('be.visible');
       cy.wait(500);
-      cy.get('.modal__briefcase-table>tbody>.crypto-table__row_body>.crypto-table__cell').eq(2).should('contain', currencyCount);
+      modalBriefcase().find('[data-cy="crypto-table-body-cell"]').eq(2).should('contain', currencyCount);
 
       //create snapshot for visual testing
       cy.percySnapshot(`Briefcase modal on ${size}`);
 
       //delete currency
-      cy.get('.modal__briefcase-table>tbody>.crypto-table__row_body>.crypto-table__cell').eq(3).click();
-      cy.get('.modal__error-message').should('be.visible');
-
-      //close modal
-      cy.get('.button_close').click();
+      modalBriefcase().find('[data-cy="crypto-table-body-cell"]').eq(3).click();
+      cy.get('[data-cy="modal-error-message"]').should('be.visible');
     });
   })
 })

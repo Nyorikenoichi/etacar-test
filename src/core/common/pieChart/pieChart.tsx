@@ -28,6 +28,9 @@ export const PieChart: React.FC<PieChartProps> = (props) => {
     if (!d3.select('.pie-chart').selectAll('svg').empty()) {
       d3.select('.pie-chart').selectAll('svg').remove();
     }
+    if (!d3.select('.pie-chart__legend').selectAll('svg').empty()) {
+      d3.select('.pie-chart__legend').selectAll('svg').remove();
+    }
     const svg = d3
       .select('.pie-chart')
       .append('svg')
@@ -63,24 +66,50 @@ export const PieChart: React.FC<PieChartProps> = (props) => {
       .style('stroke-width', '.5px')
       .style('opacity', 0.7);
 
-    svg
-      .selectAll('mySlices')
+    const svgLegend = d3
+      .select('.pie-chart__legend')
+      .append('svg')
+      .attr('height', 25 + dataPie.length * 25)
+      .attr('width', width);
+
+    svgLegend
+      .selectAll('myDots')
+      .data(dataPie)
+      .enter()
+      .append('circle')
+      .attr('cx', 30)
+      .attr('cy', function (d, i) {
+        return 25 + i * 25;
+      })
+      .attr('r', 7)
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      .attr('fill', (d) => {
+        return color(d.data.name);
+      });
+
+    svgLegend
+      .selectAll('myLabels')
       .data(dataPie)
       .enter()
       .append('text')
+      .attr('x', 45)
+      .attr('y', (d, i) => 30 + i * 25)
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      .attr('fill', (d) => color(d.data.name))
       .text(function (d) {
         return d.data.name;
       })
-      .attr('transform', function (d) {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        return `translate(${arcGenerator.centroid(d)})`;
-      })
-      .style('text-anchor', 'middle')
+      .style('text-anchor', 'left')
+      .style('font-size', '16px')
       .style('font-family', 'roboto')
-      .style('font-size', '14px')
-      .style('font-weight', '600')
-      .style('fill', '#fff');
+      .style('font-weight', '500');
   });
-  return <div className="pie-chart">{props.children}</div>;
+  return (
+    <div>
+      <div className="pie-chart__legend"></div>
+      <div className="pie-chart">{props.children}</div>
+    </div>
+  );
 };

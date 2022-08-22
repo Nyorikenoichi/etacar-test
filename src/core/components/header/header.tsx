@@ -31,7 +31,7 @@ export const Header: React.FC = () => {
           </p>
         ))}
       </div>
-      <div className="stack header__briefcase" onClick={onOpenBriefcase}>
+      <div className="stack header__briefcase" data-cy="header-briefcase" onClick={onOpenBriefcase}>
         <p className="header__briefcase-title">{t('briefcase_title')}</p>
         <div className="stack stack_vertical header__briefcase-summary">
           <div>

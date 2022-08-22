@@ -44,19 +44,24 @@ export const Pagination: React.FC<CryptoTablePaginationProps> = ({
     currentPage === pageNumber ? ' pagination__item_selected' : '';
 
   return (
-    <ul className="pagination">
+    <ul className="pagination" data-cy="pagination">
       <li className={`pagination__item${isFirstPage()}`} onClick={onPrevious}>
-        <div className="pagination__arrow pagination__arrow_left" />
+        <div className="pagination__arrow pagination__arrow_left" data-cy="pagination-arrow-left" />
       </li>
       {paginationRange.map((pageNumber) =>
         pageNumber === dots ? (
-          <li key={uuidv4()} className="pagination__item pagination__item_dots">
+          <li
+            key={uuidv4()}
+            className="pagination__item pagination__item_dots"
+            data-cy="pagination-item"
+          >
             &#8230;
           </li>
         ) : (
           <li
             key={uuidv4()}
             className={`pagination__item${isCurrentPage(pageNumber)}`}
+            data-cy="pagination-item"
             onClick={onChangePage(+pageNumber)}
           >
             {pageNumber}
@@ -64,7 +69,10 @@ export const Pagination: React.FC<CryptoTablePaginationProps> = ({
         )
       )}
       <li className={`pagination__item${isLastPage()}`} onClick={onNext}>
-        <div className="pagination__arrow pagination__arrow_right" />
+        <div
+          className="pagination__arrow pagination__arrow_right"
+          data-cy="pagination-arrow-right"
+        />
       </li>
     </ul>
   );

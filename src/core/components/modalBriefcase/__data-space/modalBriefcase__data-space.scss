@@ -2,6 +2,10 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   width: 95%;
+
+  @include media-tablet {
+    flex-wrap: wrap;
+  }
 }

@@ -18,18 +18,20 @@ export const CryptoTable: React.FC<CryptoTableProps> = ({
   className,
 }) => {
   return (
-    <table className={`crypto-table ${className !== undefined ? className : ''}`}>
+    <table
+      className={`crypto-table ${className !== undefined ? className : ''}`}
+      data-cy="crypto-table"
+    >
       <thead>
         <tr className="crypto-table__row crypto-table__row_header">
-          {headerCells.map((item) => {
-            return (
+          {headerCells.map(
+            (item) =>
               !item.isHidden && (
                 <td key={uuidv4()} className={item.columnClassNames}>
                   {item.content}
                 </td>
               )
-            );
-          })}
+          )}
         </tr>
       </thead>
       <tbody>
@@ -39,19 +41,22 @@ export const CryptoTable: React.FC<CryptoTableProps> = ({
               className={`crypto-table__row crypto-table__row_body ${
                 onRowClick ? `crypto-table__row_clickable` : ``
               }`}
+              data-cy="crypto-table-body-row"
               key={id}
               onClick={onRowClick && onRowClick(id)}
             >
-              {bodyRowsContent[rowIndex].map((content, columnIndex) => {
-                const cell = headerCells[columnIndex];
-                return (
-                  !cell.isHidden && (
-                    <td key={uuidv4()} className={cell.columnClassNames}>
+              {bodyRowsContent[rowIndex].map(
+                (content, columnIndex) =>
+                  !headerCells[columnIndex].isHidden && (
+                    <td
+                      key={uuidv4()}
+                      className={headerCells[columnIndex].columnClassNames}
+                      data-cy="crypto-table-body-cell"
+                    >
                       {content}
                     </td>
                   )
-                );
-              })}
+              )}
             </tr>
           );
         })}

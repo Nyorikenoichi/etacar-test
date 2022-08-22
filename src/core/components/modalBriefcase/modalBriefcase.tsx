@@ -65,7 +65,7 @@ export const ModalBriefcase: React.FC<ModalBriefcaseProps> = ({ setIsOpen }) => 
   return (
     <>
       <div className="modal__background" onClick={onCloseModal} />
-      <div className="modal">
+      <div className="modal" data-cy="modal-briefcase">
         <div className="stack stack_vertical modal__container">
           <Button variant={ButtonVariants.close} onClick={onCloseModal}>
             X
@@ -89,14 +89,16 @@ export const ModalBriefcase: React.FC<ModalBriefcaseProps> = ({ setIsOpen }) => 
                   />
                 </div>
                 {briefcase.length > 0 ? (
-                  <PieChart briefcase={briefcase} width={225} height={225} />
+                  <PieChart briefcase={briefcase} width={200} height={200} />
                 ) : (
                   ''
                 )}
               </div>
             </>
           ) : (
-            <p className="modal__error-message">{t('modal_no_currencies')}</p>
+            <p className="modal__error-message" data-cy="modal-error-message">
+              {t('modal_no_currencies')}
+            </p>
           )}
         </div>
       </div>
