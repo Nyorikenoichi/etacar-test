@@ -9,27 +9,29 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-      - name: Create issue
-        uses: peter-evans/create-issue@v3
-        with:
-          title: New Push to Main Branch
-          body: |
-            A new push has been made to the main branch.
+    - name: Create issue
+      run: |
+        git config --global user.email "malsef.maks@yandex.ru" # Replace with your email address
+        git config --global user.name "Nyorikenoichi" # Replace with your name
+        issue_title="New Push to Main Branch"
+        issue_body="A new push has been made to the main branch.
 
-            Commit SHA: ${{ github.sha }}
+        Commit SHA: ${{ github.sha }}
 
-            Commit message: ${{ github.event.head_commit.message }}
+        Commit message: ${{ github.event.head_commit.message }}
 
-            Pusher: ${{ github.event.pusher.name }}
+        Pusher: ${{ github.event.pusher.name }}
 
-            Repository: ${{ github.repository }}
+        Repository: ${{ github.repository }}
 
-            "The 'generate' job failed. See details at: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}'
+        View the workflow run at https://github.com/${{ github.repository }}/actions/runs/${{ github.run_number }} for more information."
 
-            View the [workflow run](${{ github.event.repository.html_url }}/actions/runs/${{ github.run_number }}) for more information.
+        "The 'generate' job failed. See details at: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}'
 
-          labels: auto-generated, push
-          assignees: ${{ github.actor }}
+        curl -X POST -H "Accept: application/vnd.github.v3+json" \
+        -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+        "https://api.github.com/repos/${{ github.repository }}/issues" \
+        -d "{\"title\":\"$issue_title\",\"body\":\"$issue_body\"}"
