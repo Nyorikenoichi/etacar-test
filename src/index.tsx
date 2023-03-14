@@ -9,6 +9,8 @@ import './core/lib/localization/i18n';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
+console.log('helo');
+
 root.render(
   <React.StrictMode>
     <BrowserRouter>
