@@ -1,0 +1,31 @@
+{
+  "en": {
+    "translation": {
+      "briefcase_title": "Briefcase: ",
+      "crypto_table_rank": "Rank",
+      "crypto_table_name": "Name",
+      "crypto_table_price": "Price",
+      "crypto_table_cap": "Market Cap",
+      "crypto_table_vwap": "VWAP(24Hr)",
+      "crypto_table_supply": "Supply",
+      "crypto_table_volume": "Volume(24Hr)",
+      "crypto_table_change": "Change(24Hr)",
+      "crypto_table_count": "Count",
+      "currency_info_price": "Price:",
+      "currency_info_max": "Maximal:",
+      "currency_info_min": "Minimal:",
+      "currency_info_avg": "Average:",
+      "modal_briefcase_heading": "Briefcase",
+      "modal_currency_heading": "Adding",
+      "modal_currency_message": "Please, enter amount of currency to add",
+      "modal_currency_button": "Add",
+      "modal_initial_price": "Initial price was",
+      "modal_current_price": "Current price is",
+      "modal_no_currencies": "No currencies yet :(",
+      "modal_wrong_input": "Please, input correct numerical value!",
+      "add_button": "Add to briefcase",
+      "author": "Maksim Maltcev",
+      "company_name": "EtaCar Systems"
+    }
+  }
+}

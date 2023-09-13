@@ -1,0 +1,11 @@
+.modal_add-currency {
+  font-weight: 300;
+  font-size: 22px;
+
+  @include media-mobile {
+    font-size: 18px;
+  }
+}
+
+@import "./__input-area/modalAddCurrency__input-area.scss";
+@import "__error-message/modalAddCurrency__error-message";

@@ -1,0 +1,18 @@
+.header {
+  display: flex;
+  width: 100%;
+  font-weight: 300;
+  font-size: 22px;
+  height: $header-height;
+  background-color: $background-light;
+
+  @include media-tablet {
+    font-size: 18px;
+  }
+}
+
+@import "./__currencies/header__currencies.scss";
+@import "./__currency/header__currency.scss";
+@import "./__briefcase/header__briefcase.scss";
+@import "./__briefcase-title/header__briefcase-title.scss";
+@import "./__briefcase-summary/header__briefcase-summary.scss";

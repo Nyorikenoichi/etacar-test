@@ -1,0 +1,13 @@
+.header__briefcase-summary {
+  justify-content: space-evenly;
+  align-items: flex-start;
+  height: 100%;
+  width: auto;
+  margin: 0 5px;
+  font-size: 18px;
+
+  @include media-laptop {
+    font-size: 16px;
+    margin: 0;
+  }
+}

@@ -1,0 +1,16 @@
+.crypto-table__cell {
+  padding: 12px 15px;
+
+  @include media-tablet {
+    padding: 13px 12px;
+  }
+
+  @include media-mobile {
+    padding: 14px 7px;
+  }
+}
+
+@import "_align-left/cryptoTable__cell_align-left";
+@import "_align-right/cryptoTable__cell_align-right";
+@import "_wide/cryptoTable__cell_wide";
+

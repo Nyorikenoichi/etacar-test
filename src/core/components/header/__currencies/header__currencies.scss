@@ -1,0 +1,14 @@
+.header__currencies {
+  width: 45%;
+  margin: 0 0 0 150px;
+
+  @include media-laptop {
+    margin: 0 0 0 50px;
+    width: 55%;
+  }
+
+  @include media-tablet {
+    margin: 0 0 0 10px;
+    width: 70%;
+  }
+}

@@ -1,0 +1,5 @@
+.modal__input-area {
+  @include media-mobile {
+    flex-direction: column;
+  }
+}

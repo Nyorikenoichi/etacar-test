@@ -1,0 +1,23 @@
+.modal__container {
+  justify-content: flex-start;
+  width: 750px;
+  min-height: 200px;
+  max-height: 700px;
+  padding: 20px;
+  overflow-y: auto;
+  border-radius: 10px;
+  box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.2);
+  background: $background-light;
+  color: $text-dark;
+
+  @include media-tablet {
+    width: 350px;
+    padding: 10px;
+    font-size: 18px;
+  }
+
+  @include media-mobile {
+    width: 280px;
+    padding: 5px;
+  }
+}

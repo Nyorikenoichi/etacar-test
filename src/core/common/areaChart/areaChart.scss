@@ -1,0 +1,10 @@
+.area-chart {
+  margin-top: 20px;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+}
+
+@import "__tooltip/areaChart__tooltip.scss";
+@import "__tooltip-date/areaChart__tooltip-date.scss";
+@import "__vertical-line/areaChart__vertical-line.scss";
+@import "__listening-rect/areaChart__listening-rect.scss";

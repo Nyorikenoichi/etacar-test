@@ -1,0 +1,13 @@
+.button_table-cell-remove {
+  color: $text-light;
+  background: $cancel-color;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 300ms;
+  font-size: 18px;
+
+  &:hover {
+    transform: scale(1.1);
+    background: $cancel-color-dark;
+  }
+}
